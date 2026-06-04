@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Mëso Shqip</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a;--ink2:#3d3d3d;--ink3:#767676;--ink4:#b0b0b0;
+  --bg:#faf9f6;--bg2:#f3f1ec;--bg3:#ebe8e1;--bg4:#e0dcd4;
+  --red:#c0392b;--red2:#e74c3c;--redl:rgba(192,57,43,.08);--redl2:rgba(192,57,43,.15);
+  --grn:#27ae60;--grnl:rgba(39,174,96,.1);
+  --gold:#b7860b;--goldl:rgba(183,134,11,.1);
+  --blu:#2471a3;
+  --radius:16px;--radius2:24px;--radius3:32px;
+  --shadow:0 2px 8px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);
+  --shadow2:0 8px 32px rgba(0,0,0,.10),0 0 0 1px rgba(0,0,0,.04);
+  --nh:64px;--hh:56px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;background:#faf9f6}
+body{font-family:'DM Sans',sans-serif;background:#faf9f6;color:#1a1a1a;min-height:100vh;max-width:430px;margin:0 auto;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.hdr{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--hh);background:rgba(250,249,246,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bg3);z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.logo{display:flex;align-items:center;gap:9px}
+.lmk{width:32px;height:32px;border-radius:10px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.lnm{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);letter-spacing:-.3px}
+.lnm em{color:var(--red);font-style:italic}
+.hpills{display:flex;gap:4px}
+.hp{display:flex;align-items:center;gap:3px;background:var(--bg2);border:1px solid var(--bg3);border-radius:20px;padding:5px 10px;font-size:12px;font-weight:600;color:var(--ink2);transition:transform .15s}
+.hp:active{transform:scale(.94)}
+
+/* NAV */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--nh);background:rgba(250,249,246,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bg3);z-index:200;display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}
+.ni{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;cursor:pointer;color:var(--ink4);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;padding:0;transition:color .18s}
+.nio{font-size:22px;line-height:1;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.ni.act{color:var(--red)}
+.ni.act .nio{transform:scale(1.15) translateY(-1px)}
+
+/* PAGES */
+.pages{margin-top:var(--hh);margin-bottom:var(--nh);min-height:calc(100vh - var(--hh) - var(--nh));background:#faf9f6}
+.pg{display:none}
+.pg.act{display:block;animation:pgi .22s ease}
+@keyframes pgi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HOME ── */
+.hw{padding:24px 20px}
+
+/* greeting */
+.greet-row{margin-bottom:24px}
+.greet-time{font-size:13px;color:var(--ink3);font-weight:400;margin-bottom:4px}
+.greet-title{font-family:'DM Serif Display',serif;font-size:30px;line-height:1.2;color:var(--ink)}
+.greet-title span{color:var(--red);font-style:italic}
+
+/* streak */
+.streak-card{background:var(--ink);border-radius:var(--radius2);padding:20px;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.streak-card:active{transform:scale(.98)}
+.streak-card::after{content:'🦅';position:absolute;right:-6px;bottom:-14px;font-size:80px;opacity:.07;transform:rotate(-6deg)}
+.sc-inner{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+.sc-fire{font-size:40px;animation:fd 2s ease-in-out infinite alternate}
+@keyframes fd{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.06) rotate(2deg)}}
+.sc-info{flex:1}
+.sc-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2px}
+.sc-num{font-family:'DM Serif Display',serif;font-size:52px;font-weight:400;line-height:1;color:#fff}
+.sc-sub{font-size:13px;color:rgba(255,255,255,.45);margin-top:2px}
+.sc-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px 14px;text-align:center}
+.sc-badge-n{font-family:'DM Serif Display',serif;font-size:22px;color:#f5c842}
+.sc-badge-l{font-size:10px;color:rgba(255,255,255,.4);font-weight:500;margin-top:1px}
+
+/* xp */
+.xp-card{background:#fff;border:1px solid var(--bg3);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.xp-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.xp-lbl{font-size:14px;font-weight:600;color:var(--ink)}
+.xp-val{font-size:14px;font-weight:700;color:var(--gold)}
+.xp-track{background:var(--bg3);border-radius:6px;height:7px;overflow:hidden}
+.xp-fill{height:100%;border-radius:6px;background:var(--gold);transition:width 1s cubic-bezier(.4,0,.2,1)}
+.xp-sub{font-size:11px;color:var(--ink3);margin-top:6px;display:flex;justify-content:space-between}
+
+/* continue */
+.cont-card{background:#fff;border:1.5px solid var(--bg3);border-radius:var(--radius2);padding:16px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .18s;box-shadow:var(--shadow)}
+.cont-card:hover{border-color:var(--red);box-shadow:var(--shadow2)}
+.cont-card:active{transform:scale(.98)}
+.cont-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:var(--redl);border:1px solid var(--redl2)}
+.cont-info{flex:1}
+.cont-tag{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.cont-name{font-size:16px;font-weight:700;color:var(--ink)}
+.cont-sub{font-size:12px;color:var(--ink3);margin-top:2px}
+.cont-arr{font-size:20px;color:var(--ink4)}
+
+/* stats */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.stat-box{background:#fff;border:1px solid var(--bg3);border-radius:var(--radius);padding:14px 12px;text-align:center;box-shadow:var(--shadow)}
+.stat-n{font-family:'DM Serif Display',serif;font-size:28px;line-height:1;margin-bottom:4px}
+.stat-l{font-size:11px;color:var(--ink3);font-weight:500}
+
+/* goals */
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.sec-title{font-size:16px;font-weight:700;color:var(--ink)}
+.sec-link{font-size:13px;color:var(--red);font-weight:600;cursor:pointer}
+.goal-list{display:flex;flex-direction:column;gap:8px}
+.goal-item{background:#fff;border:1.5px solid var(--bg3);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:var(--shadow)}
+.goal-item:active{transform:scale(.98)}
+.goal-item.done{border-color:rgba(39,174,96,.3);background:rgba(39,174,96,.03)}
+.goal-ico{font-size:22px;flex-shrink:0}
+.goal-txt{flex:1}
+.goal-n{font-size:14px;font-weight:600;color:var(--ink)}
+.goal-s{font-size:12px;color:var(--ink3);margin-top:1px}
+.goal-ring{width:26px;height:26px;border-radius:50%;border:2px solid var(--bg4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .25s}
+.goal-item.done .goal-ring{background:var(--grn);border-color:var(--grn);color:#fff;animation:rp .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rp{from{transform:scale(.5)}to{transform:scale(1)}}
+
+/* ── LEARN ── */
+.lw{padding:20px}
+.lv-tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.lv-tabs::-webkit-scrollbar{display:none}
+.lvt{flex-shrink:0;padding:8px 16px;border-radius:20px;border:1.5px solid var(--bg3);background:#fff;color:var(--ink3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap;box-shadow:var(--shadow)}
+.lvt.bg.on{background:var(--grn);border-color:var(--grn);color:#fff;box-shadow:0 4px 16px rgba(39,174,96,.3)}
+.lvt.md.on{background:var(--blu);border-color:var(--blu);color:#fff;box-shadow:0 4px 16px rgba(36,113,163,.3)}
+.lvt.hd.on{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 4px 16px rgba(183,134,11,.3)}
+.lvt.ex.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 4px 16px rgba(192,57,43,.3)}
+
+/* path */
+.pw{position:relative;padding:8px 0 20px}
+.pl{position:absolute;left:50%;transform:translateX(-50%);width:2px;top:0;bottom:0;background:var(--bg3);z-index:0}
+.pnd{position:relative;z-index:1;display:flex;align-items:center;margin-bottom:4px}
+.pnd:nth-child(odd){justify-content:flex-start;padding-left:16px}
+.pnd:nth-child(even){justify-content:flex-end;padding-right:16px}
+.nb{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:all .18s;width:108px}
+.nb:active{transform:scale(.94)}
+.nb.lk{opacity:.35;cursor:not-allowed}
+.nb.lk:active{transform:none}
+.nc{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative;transition:all .2s;border:2px solid var(--bg3);background:#fff;box-shadow:var(--shadow)}
+.nb.dn .nc{background:var(--grn);border-color:var(--grn);box-shadow:0 4px 16px rgba(39,174,96,.25)}
+.nb.cur .nc{background:var(--red);border-color:var(--red);box-shadow:0 4px 20px rgba(192,57,43,.3);animation:np 2.5s ease-in-out infinite}
+@keyframes np{0%,100%{box-shadow:0 4px 20px rgba(192,57,43,.3)}50%{box-shadow:0 6px 32px rgba(192,57,43,.5);transform:scale(1.04)}}
+.nb.lk .nc{background:var(--bg2);border-color:var(--bg3)}
+.nlk{position:absolute;bottom:-3px;right:-3px;background:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;border:1px solid var(--bg3)}
+.nst{display:flex;gap:1px;font-size:13px}
+.nnm{font-size:11px;font-weight:600;text-align:center;color:var(--ink3)}
+.nb.dn .nnm{color:var(--grn)}
+.nb.cur .nnm{color:var(--red);font-weight:700}
+.psdiv{text-align:center;padding:14px 0;position:relative;z-index:1;margin:6px 0}
+.psdin{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--bg3);border-radius:20px;padding:7px 16px;box-shadow:var(--shadow)}
+.psdt{font-size:12px;font-weight:600;color:var(--ink2)}
+
+/* ── QUIZ OVERLAY ── */
+.qov{position:fixed;inset:0;z-index:500;background:var(--bg);transform:translateY(100%);transition:transform .38s cubic-bezier(.4,0,.2,1);visibility:hidden}
+.qov.open{transform:translateY(0)!important;visibility:visible}
+.qhd{height:54px;display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(250,249,246,.95);border-bottom:1px solid var(--bg3);backdrop-filter:blur(10px)}
+.qcl{width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--bg3);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:var(--ink2);transition:all .15s;flex-shrink:0}
+.qcl:hover{background:var(--bg3)}
+.qpb{flex:1;background:var(--bg3);border-radius:4px;height:6px;overflow:hidden}
+.qpf{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.qpf.bg{background:var(--grn)}
+.qpf.md{background:var(--blu)}
+.qpf.hd{background:var(--gold)}
+.qpf.ex{background:var(--red)}
+.qlv{display:flex;gap:2px;font-size:15px;flex-shrink:0}
+.qbdy{padding:24px 20px;overflow-y:auto;max-height:calc(100vh - 54px - 68px)}
+.qchp{display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--bg3);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px}
+.qq{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.3;margin-bottom:8px;color:var(--ink)}
+.qhn{font-size:13px;color:var(--ink3);margin-bottom:20px;font-style:italic}
+
+/* MC */
+.mco{background:#fff;border:1.5px solid var(--bg3);border-radius:var(--radius);padding:15px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .18s;font-size:16px;font-weight:500;color:var(--ink);margin-bottom:10px;box-shadow:var(--shadow)}
+.mco:hover:not(.dis){border-color:var(--red);background:var(--redl);transform:translateX(3px)}
+.mcrng{width:22px;height:22px;border-radius:50%;border:2px solid var(--bg4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s}
+.mco.ok{border-color:var(--grn)!important;background:var(--grnl)!important;animation:aok .35s cubic-bezier(.34,1.56,.64,1)}
+.mco.ok .mcrng{background:var(--grn);border-color:var(--grn);color:#fff}
+.mco.no{border-color:var(--red)!important;background:var(--redl)!important;animation:ano .4s ease}
+.mco.no .mcrng{background:var(--red);border-color:var(--red);color:#fff}
+.mco.dis{cursor:not-allowed}
+@keyframes aok{0%{transform:scale(1)}40%{transform:scale(1.03) translateX(3px)}100%{transform:scale(1)}}
+@keyframes ano{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* fill */
+.fsen{font-family:'DM Serif Display',serif;font-size:22px;line-height:1.9;margin-bottom:14px;color:var(--ink)}
+.fbl{display:inline-block;min-width:80px;border-bottom:2.5px solid var(--blu);padding:0 6px;text-align:center;color:var(--blu);font-weight:700;transition:all .3s}
+.fbl.ok{border-color:var(--grn);color:var(--grn)}
+.fbl.no{border-color:var(--red);color:var(--red)}
+
+/* type */
+.tf{width:100%;background:#fff;border:1.5px solid var(--bg3);border-radius:var(--radius);padding:15px 18px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:18px;font-weight:500;outline:none;transition:all .2s;margin-bottom:14px;caret-color:var(--red);box-shadow:var(--shadow)}
+.tf:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--redl)}
+.tf.ok{border-color:var(--grn);background:var(--grnl)}
+.tf.no{border-color:var(--red);background:var(--redl)}
+.ash{display:none;background:var(--grnl);border:1px solid rgba(39,174,96,.2);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--grn);font-weight:600;margin-bottom:14px}
+
+/* sentence */
+.sdrp{min-height:56px;background:var(--bg2);border:2px dashed var(--bg4);border-radius:var(--radius);padding:12px 14px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:14px;transition:all .22s}
+.sdrp.has{border-color:var(--blu);background:rgba(36,113,163,.04)}
+.sdrp.ok{border-color:var(--grn)!important;background:var(--grnl)!important}
+.sdrp.no{border-color:var(--red)!important;background:var(--redl)!important}
+.dph{color:var(--ink4);font-size:13px}
+.wbk{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.wbl{width:100%;font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.wt{background:#fff;border:1.5px solid var(--bg3);border-radius:10px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--ink);box-shadow:var(--shadow)}
+.wt:hover{border-color:var(--red);transform:translateY(-2px)}
+.wt:active{transform:scale(.94)}
+.wt.ud{background:var(--redl);border-color:var(--red);color:var(--red)}
+.wt.ud:hover{background:var(--redl2);transform:translateY(-2px)}
+
+/* translate */
+.trfr{background:#fff;border:1px solid var(--bg3);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.trlg{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.trtx{font-family:'DM Serif Display',serif;font-size:20px;line-height:1.5;color:var(--ink)}
+.trin{width:100%;background:#fff;border:1.5px solid var(--bg3);border-radius:var(--radius);padding:14px 16px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;resize:none;min-height:90px;transition:all .2s;margin-bottom:14px;caret-color:var(--red);box-shadow:var(--shadow)}
+.trin:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--redl)}
+
+/* feedback */
+.fb{border-radius:var(--radius);padding:14px 16px;display:none;flex-direction:column;gap:5px;margin-bottom:16px;animation:fbs .25s ease}
+@keyframes fbs{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fb.ok{background:var(--grnl);border:1.5px solid rgba(39,174,96,.25);display:flex}
+.fb.no{background:var(--redl);border:1.5px solid rgba(192,57,43,.2);display:flex}
+.fbt{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700}
+.fb.ok .fbt{color:var(--grn)}
+.fb.no .fbt{color:var(--red)}
+.fbd{font-size:13px;color:var(--ink3)}
+.fba{font-size:14px;color:var(--ink);font-weight:600}
+
+/* quiz footer */
+.qft{display:flex;gap:10px;align-items:center;padding:14px 20px;background:rgba(250,249,246,.95);border-top:1px solid var(--bg3);position:sticky;bottom:0;backdrop-filter:blur(10px)}
+.qsk{color:var(--ink3);font-size:14px;font-weight:600;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.qrt{margin-left:auto;display:flex;gap:8px}
+
+/* COMPLETION */
+.cscr{text-align:center;padding:32px 20px 20px;min-height:calc(100vh - 54px);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cemo{font-size:64px;margin-bottom:20px;animation:cep .8s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cep{from{transform:scale(0) rotate(-15deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.ctit{font-family:'DM Serif Display',serif;font-size:34px;margin-bottom:6px;color:var(--ink)}
+.csb2{font-size:15px;color:var(--ink3);margin-bottom:24px}
+.cxpw{background:var(--goldl);border:1.5px solid rgba(183,134,11,.2);border-radius:var(--radius2);padding:20px 28px;margin-bottom:20px;animation:cxr .5s .25s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes cxr{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.cxpn{font-family:'DM Serif Display',serif;font-size:52px;color:var(--gold);line-height:1}
+.cxpl{font-size:13px;color:var(--ink3);font-weight:500;margin-top:4px}
+.cst{font-size:36px;letter-spacing:5px;margin-bottom:22px;animation:csin .4s .5s both}
+@keyframes csin{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.csrow{display:flex;gap:10px;margin-bottom:28px;width:100%}
+.csbox{flex:1;background:#fff;border:1px solid var(--bg3);border-radius:var(--radius);padding:14px 10px;text-align:center;box-shadow:var(--shadow)}
+.csbn{font-family:'DM Serif Display',serif;font-size:26px}
+.csbl{font-size:11px;color:var(--ink3);font-weight:500;margin-top:3px}
+.cbts{display:flex;gap:10px;width:100%}
+
+/* ── SENTENCES ── */
+.snw{padding:20px}
+.sher{background:var(--ink);border-radius:var(--radius2);padding:22px;margin-bottom:20px;position:relative;overflow:hidden}
+.sher::after{content:'🧩';position:absolute;right:-8px;bottom:-12px;font-size:80px;opacity:.08}
+.sher h2{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;margin-bottom:6px}
+.sher p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
+.stbs2{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.stbs2::-webkit-scrollbar{display:none}
+.st2{flex-shrink:0;padding:8px 16px;border-radius:20px;border:1.5px solid var(--bg3);background:#fff;color:var(--ink3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap;box-shadow:var(--shadow)}
+.st2.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.gcd{background:#fff;border:1px solid var(--bg3);border-radius:var(--radius2);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.gcbg{display:inline-flex;align-items:center;gap:4px;background:var(--bg2);border:1px solid var(--bg3);color:var(--ink3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.gcal{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:4px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.gcal:hover{color:var(--red)}
+.gcen{font-size:14px;color:var(--ink3);margin-bottom:12px}
+.gcst{font-family:monospace;font-size:12px;color:var(--blu);background:var(--bg2);border-radius:10px;padding:10px 14px;margin-bottom:12px;border:1px solid var(--bg3)}
+.gcnt{font-size:13px;color:var(--ink2);line-height:1.65;border-left:3px solid var(--red);padding-left:12px}
+.sbex{background:#fff;border:1.5px solid var(--bg3);border-radius:var(--radius2);padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.sbn{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.sbqt{font-size:16px;font-weight:700;margin-bottom:5px;color:var(--ink)}
+.sbht{font-size:13px;color:var(--ink3);font-style:italic;margin-bottom:14px}
+
+/* ── FLASHCARDS ── */
+.fcw{padding:20px}
+.fcct{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.fcsl{flex:1;background:#fff;color:var(--ink);border:1.5px solid var(--bg3);border-radius:12px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;outline:none;box-shadow:var(--shadow)}
+.fcsl:focus{border-color:var(--red)}
+.fcht{text-align:center;font-size:12px;color:var(--ink3);margin-bottom:6px}
+.fcsc{perspective:1200px;height:200px;cursor:pointer;margin-bottom:10px}
+.fccd{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.fccd.fl{transform:rotateY(180deg)}
+.fcf{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.fcfr{background:#fff;border:1.5px solid var(--bg3);box-shadow:var(--shadow2)}
+.fcbk{background:var(--ink);border:1.5px solid var(--ink);transform:rotateY(180deg)}
+.fcwd{font-family:'DM Serif Display',serif;font-size:40px;margin-bottom:6px;line-height:1.1}
+.fcfr .fcwd{color:var(--ink)}
+.fcbk .fcwd{color:#fff;font-size:28px}
+.fclg{font-size:12px;font-weight:500}
+.fcfr .fclg{color:var(--ink3)}
+.fcbk .fclg{color:rgba(255,255,255,.4)}
+.fcph{font-size:15px;color:#f5c842;font-weight:600;margin-bottom:4px}
+.fccn{text-align:center;font-size:13px;color:var(--ink3);font-weight:500;margin-bottom:10px}
+.fcbt{display:flex;gap:8px;justify-content:center;margin-bottom:8px}
+.fcdts{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.fcd{width:7px;height:7px;border-radius:50%;background:var(--bg3);transition:all .25s}
+.fcd.sn{background:var(--grn)}
+.fcd.cu{background:var(--red);transform:scale(1.4)}
+
+/* ── PHRASES ── */
+.phw{padding:20px}
+.phsw{position:relative;margin-bottom:16px}
+.phsi{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--ink3);pointer-events:none}
+.phsi2{width:100%;background:#fff;border:1.5px solid var(--bg3);border-radius:14px;padding:12px 16px 12px 40px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;box-shadow:var(--shadow)}
+.phsi2:focus{border-color:var(--red)}
+.phsi2::placeholder{color:var(--ink4)}
+.phct{font-size:14px;font-weight:700;color:var(--ink2);margin:18px 0 10px;display:flex;align-items:center;gap:6px}
+.phi{background:#fff;border:1px solid var(--bg3);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer;transition:all .18s;box-shadow:var(--shadow)}
+.phi:hover{border-color:var(--red);transform:translateX(3px)}
+.phi:active{transform:scale(.97)}
+.phtx{flex:1}
+.phal{font-size:15px;font-weight:700;margin-bottom:2px;color:var(--ink)}
+.phen{font-size:12px;color:var(--ink3)}
+.phsp{width:36px;height:36px;border-radius:50%;background:var(--redl);border:1.5px solid var(--redl2);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0;transition:all .18s}
+.phsp:hover{background:var(--red);transform:scale(1.08)}
+
+/* ── PROGRESS ── */
+.prw{padding:20px}
+.prh{background:var(--ink);border-radius:var(--radius2);padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
+.prh::before{content:'🦅';position:absolute;right:-8px;bottom:-12px;font-size:100px;opacity:.06;transform:rotate(-4deg)}
+.prbdg{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:12px}
+.prht{font-family:'DM Serif Display',serif;font-size:26px;color:#fff;margin-bottom:4px}
+.prhs{font-size:13px;color:rgba(255,255,255,.45)}
+.prsts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.prst{background:#fff;border:1px solid var(--bg3);border-radius:var(--radius);padding:14px 10px;text-align:center;box-shadow:var(--shadow)}
+.prstn{font-family:'DM Serif Display',serif;font-size:28px;line-height:1}
+.prstl{font-size:11px;color:var(--ink3);font-weight:500;margin-top:4px}
+.prsec{background:#fff;border:1px solid var(--bg3);border-radius:var(--radius2);padding:18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.prst2{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:6px;color:var(--ink)}
+.prrw{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.prlb{font-size:13px;color:var(--ink3);width:80px;flex-shrink:0;font-weight:500}
+.prtr{flex:1;background:var(--bg3);border-radius:4px;height:7px;overflow:hidden}
+.prb{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.prpc{font-size:12px;font-weight:700;width:32px;text-align:right}
+.agrd{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.abx{background:var(--bg2);border:1.5px solid var(--bg3);border-radius:var(--radius);padding:14px 10px;text-align:center}
+.abx.ernd{border-color:rgba(183,134,11,.35);background:var(--goldl);animation:ae .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes ae{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.aic{font-size:26px;margin-bottom:5px}
+.an{font-size:11px;font-weight:700;color:var(--ink)}
+.ad{font-size:10px;color:var(--ink3);margin-top:2px}
+
+/* ── BUTTONS ── */
+.btn{padding:13px 20px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;letter-spacing:.1px}
+.br{background:var(--red);color:#fff;box-shadow:0 3px 0 #8e1a10,0 6px 20px rgba(192,57,43,.25)}
+.br:hover{transform:translateY(-1px);box-shadow:0 4px 0 #8e1a10,0 8px 24px rgba(192,57,43,.3)}
+.br:active{transform:translateY(2px);box-shadow:0 1px 0 #8e1a10}
+.bg2b{background:#fff;color:var(--ink);border:1.5px solid var(--bg3);box-shadow:var(--shadow)}
+.bg2b:hover{border-color:var(--bg4)}
+.bgr{background:var(--grn);color:#fff;box-shadow:0 3px 0 #1a7a42}
+.bgr:hover{transform:translateY(-1px)}
+.bgr:active{transform:translateY(2px)}
+.bsm{padding:10px 16px;font-size:13px;border-radius:11px}
+.bfl{width:100%}
+
+/* XP popup */
+.xpp{position:fixed;top:64px;right:16px;z-index:999;background:var(--gold);color:#fff;font-weight:700;font-size:15px;padding:9px 16px;border-radius:10px;box-shadow:0 6px 24px rgba(183,134,11,.4);display:none;pointer-events:none;animation:xpa 2.2s forwards}
+@keyframes xpa{0%{opacity:0;transform:translateY(-10px) scale(.85)}12%{opacity:1;transform:translateY(0) scale(1.05)}75%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-20px)}}
+
+/* confetti */
+.cfw{position:fixed;inset:0;pointer-events:none;z-index:998;overflow:hidden;display:none}
+.cfw.act{display:block}
+.cf{position:absolute;width:9px;height:9px;border-radius:2px;animation:cff linear forwards;top:-10px}
+@keyframes cff{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+<div id="xpp" class="xpp"></div>
+<div id="cfw" class="cfw"></div>
+
+<header class="hdr">
+  <div class="logo">
+    <div class="lmk">🦅</div>
+    <div class="lnm">Mëso <em>Shqip</em></div>
+  </div>
+  <div class="hpills">
+    <div class="hp">🔥 <span id="hS">0</span></div>
+    <div class="hp">⭐ <span id="hX">0</span></div>
+    <div class="hp">❤️ <span id="hL">5</span></div>
+  </div>
+</header>
+
+<div class="pages">
+  <!-- HOME -->
+  <div id="pg-home" class="pg act">
+    <div class="hw">
+      <div class="greet-row">
+        <div class="greet-time" id="gtm">Good morning</div>
+        <div class="greet-title">Let's speak some<br><span>Albanian today.</span></div>
+      </div>
+      <div class="streak-card" onclick="gp('progress')">
+        <div class="sc-inner">
+          <div class="sc-fire">🔥</div>
+          <div class="sc-info">
+            <div class="sc-label">Day Streak</div>
+            <div class="sc-num" id="hSn">0</div>
+            <div class="sc-sub">Keep it going — don't break it.</div>
+          </div>
+          <div class="sc-badge">
+            <div class="sc-badge-n" id="hXt">0</div>
+            <div class="sc-badge-l">XP today</div>
+          </div>
+        </div>
+      </div>
+      <div class="xp-card">
+        <div class="xp-row"><div class="xp-lbl">Level <span id="xLv">1</span></div><div class="xp-val"><span id="xVl">0</span> XP</div></div>
+        <div class="xp-track"><div class="xp-fill" id="xFl" style="width:0%"></div></div>
+        <div class="xp-sub"><span id="xSL">0 / 200</span><span id="xSR">200 XP to next level</span></div>
+      </div>
+      <div class="cont-card" onclick="gp('learn')">
+        <div class="cont-ico" id="ccIc">📚</div>
+        <div class="cont-info">
+          <div class="cont-tag">Pick up where you left off</div>
+          <div class="cont-name" id="ccNm">Greetings</div>
+          <div class="cont-sub" id="ccSb">Beginner · tap to jump in</div>
+        </div>
+        <div class="cont-arr">›</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-n" style="color:var(--grn)" id="stL">0</div><div class="stat-l">Lessons</div></div>
+        <div class="stat-box"><div class="stat-n" style="color:var(--gold)" id="stX">0</div><div class="stat-l">Total XP</div></div>
+        <div class="stat-box"><div class="stat-n" style="color:var(--blu)" id="stW">0</div><div class="stat-l">Words</div></div>
+      </div>
+      <div class="sec-hdr"><div class="sec-title">Today's goals</div><div class="sec-link" onclick="gp('learn')">Start →</div></div>
+      <div class="goal-list">
+        <div class="goal-item" id="g1" onclick="gp('learn')"><div class="goal-ico">📖</div><div class="goal-txt"><div class="goal-n">Do at least one lesson</div><div class="goal-s">Any topic works — just start</div></div><div class="goal-ring" id="gr1"></div></div>
+        <div class="goal-item" id="g2" onclick="gp('sentences')"><div class="goal-ico">🧩</div><div class="goal-txt"><div class="goal-n">Build 3 sentences</div><div class="goal-s">This is where the real learning happens</div></div><div class="goal-ring" id="gr2"></div></div>
+        <div class="goal-item" id="g3" onclick="gp('flash')"><div class="goal-ico">🃏</div><div class="goal-txt"><div class="goal-n">Flip through 10 flashcards</div><div class="goal-s">Quick and easy — you've got this</div></div><div class="goal-ring" id="gr3"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEARN -->
+  <div id="pg-learn" class="pg">
+    <div class="lw">
+      <div class="lv-tabs">
+        <button class="lvt bg on" onclick="setLv('bg',this)">Beginner</button>
+        <button class="lvt md" onclick="setLv('md',this)">Medium</button>
+        <button class="lvt hd" onclick="setLv('hd',this)">Hard</button>
+        <button class="lvt ex" onclick="setLv('ex',this)">Extreme</button>
+      </div>
+      <div id="pathWrap"></div>
+    </div>
+  </div>
+
+  <!-- SENTENCES -->
+  <div id="pg-sentences" class="pg">
+    <div class="snw">
+      <div class="sher">
+        <h2>Sentence Builder</h2>
+        <p>Stop half-Albanian half-English. Learn why Albanian sentences feel different — and how to actually build them.</p>
+      </div>
+      <div class="stbs2">
+        <button class="st2 on" onclick="setSB('pat',this)">Grammar rules</button>
+        <button class="st2" onclick="setSB('easy',this)">Easy</button>
+        <button class="st2" onclick="setSB('med',this)">Medium</button>
+        <button class="st2" onclick="setSB('adv',this)">Advanced</button>
+      </div>
+      <div id="sbCnt"></div>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="pg-flash" class="pg">
+    <div class="fcw">
+      <div style="font-family:'DM Serif Display',serif;font-size:28px;margin-bottom:4px;color:var(--ink)">Flashcards</div>
+      <div style="font-size:13px;color:var(--ink3);margin-bottom:16px">Tap to flip. Swipe to move. Simple.</div>
+      <div class="fcct">
+        <select class="fcsl" id="fcCat" onchange="loadFC()">
+          <option value="gr">Greetings</option><option value="nm">Numbers</option>
+          <option value="fm">Family</option><option value="fd">Food & Drink</option>
+          <option value="vb">Common Verbs</option><option value="aj">Adjectives</option>
+          <option value="tm">Time & Days</option><option value="bd">Body & Health</option>
+        </select>
+        <select class="fcsl" id="fcDir" onchange="loadFC()" style="max-width:100px">
+          <option value="a">ALB → ENG</option><option value="e">ENG → ALB</option>
+        </select>
+      </div>
+      <div class="fcht">Tap card to flip · swipe left/right to navigate</div>
+      <div class="fcsc" id="fcSc" onclick="flipFC()">
+        <div class="fccd" id="fcCd">
+          <div class="fcf fcfr"><div class="fcwd" id="fcQ">—</div><div class="fclg" id="fcQL">Albanian</div></div>
+          <div class="fcf fcbk"><div class="fcwd" id="fcA">—</div><div class="fcph" id="fcPh">—</div><div class="fclg">English</div></div>
+        </div>
+      </div>
+      <div class="fccn">Card <span id="fcI">1</span> of <span id="fcT">—</span></div>
+      <div class="fcdts" id="fcDts"></div>
+      <div class="fcbt">
+        <button class="btn bg2b bsm" onclick="fcN(-1)">← Back</button>
+        <button class="btn br bsm" onclick="spk(fcD[fcC].a)">🔊 Say it</button>
+        <button class="btn bg2b bsm" onclick="fcN(1)">Next →</button>
+      </div>
+      <button class="btn bg2b bsm bfl" style="margin-top:6px" onclick="fcSh()">🔀 Shuffle deck</button>
+    </div>
+  </div>
+
+  <!-- PHRASES -->
+  <div id="pg-phrases" class="pg">
+    <div class="phw">
+      <div style="font-family:'DM Serif Display',serif;font-size:28px;margin-bottom:4px;color:var(--ink)">Phrasebook</div>
+      <div style="font-size:13px;color:var(--ink3);margin-bottom:16px">Real phrases for real conversations. Tap 🔊 to hear.</div>
+      <div class="phsw"><span class="phsi">🔍</span><input class="phsi2" id="phQ" placeholder="Search a phrase..." oninput="fltPh()"></div>
+      <div id="phCnt"></div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="pg-progress" class="pg">
+    <div class="prw">
+      <div class="prh">
+        <div class="prbdg">🦅 <span id="prBdg">Newcomer</span></div>
+        <div class="prht" id="prTt">You're just getting started.</div>
+        <div class="prhs" id="prSb">Every lesson counts. Keep going.</div>
+      </div>
+      <div class="prsts">
+        <div class="prst"><div class="prstn" style="color:var(--gold)" id="psX">0</div><div class="prstl">Total XP</div></div>
+        <div class="prst"><div class="prstn" style="color:var(--red)" id="psS">0</div><div class="prstl">Streak</div></div>
+        <div class="prst"><div class="prstn" style="color:var(--grn)" id="psL">0</div><div class="prstl">Lessons</div></div>
+      </div>
+      <div class="prsec">
+        <div class="prst2">Level progress</div>
+        <div class="prrw"><div class="prlb">Beginner</div><div class="prtr"><div class="prb" id="pb-bg" style="width:0%;background:var(--grn)"></div></div><div class="prpc" style="color:var(--grn)" id="pp-bg">0%</div></div>
+        <div class="prrw"><div class="prlb">Medium</div><div class="prtr"><div class="prb" id="pb-md" style="width:0%;background:var(--blu)"></div></div><div class="prpc" style="color:var(--blu)" id="pp-md">0%</div></div>
+        <div class="prrw"><div class="prlb">Hard</div><div class="prtr"><div class="prb" id="pb-hd" style="width:0%;background:var(--gold)"></div></div><div class="prpc" style="color:var(--gold)" id="pp-hd">0%</div></div>
+        <div class="prrw"><div class="prlb">Extreme</div><div class="prtr"><div class="prb" id="pb-ex" style="width:0%;background:var(--red)"></div></div><div class="prpc" style="color:var(--red)" id="pp-ex">0%</div></div>
+      </div>
+      <div class="prsec"><div class="prst2">Achievements</div><div class="agrd" id="aGrd"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ OVERLAY -->
+<div id="qOv" class="qov">
+  <div class="qhd">
+    <button class="qcl" onclick="clsQ()">✕</button>
+    <div class="qpb"><div class="qpf" id="qPF" style="width:0%"></div></div>
+    <div class="qlv" id="qLv">❤️❤️❤️❤️❤️</div>
+  </div>
+  <div class="qbdy" id="qBdy"></div>
+  <div class="qft"><button class="qsk" onclick="clsQ()">Quit</button><div class="qrt" id="qBts"></div></div>
+</div>
+
+<nav class="bnav">
+  <button class="ni act" data-p="home" onclick="gp('home',this)"><span class="nio">🏠</span><span>Home</span></button>
+  <button class="ni" data-p="learn" onclick="gp('learn',this)"><span class="nio">📚</span><span>Learn</span></button>
+  <button class="ni" data-p="sentences" onclick="gp('sentences',this)"><span class="nio">🧩</span><span>Build</span></button>
+  <button class="ni" data-p="flash" onclick="gp('flash',this)"><span class="nio">🃏</span><span>Cards</span></button>
+  <button class="ni" data-p="phrases" onclick="gp('phrases',this)"><span class="nio">💬</span><span>Phrases</span></button>
+</nav>
+
+<script>
+const TOPICS=[{id:'greet',name:'Greetings',icon:'👋'},{id:'nums',name:'Numbers',icon:'🔢'},{id:'family',name:'Family',icon:'👨‍👩‍👧'},{id:'food',name:'Food & Drink',icon:'🍕'},{id:'time',name:'Time & Days',icon:'🕐'},{id:'direct',name:'Directions',icon:'🗺️'},{id:'work',name:'Work',icon:'💼'},{id:'colors',name:'Colors',icon:'🎨'},{id:'body',name:'Body & Health',icon:'🫀'},{id:'emotions',name:'Emotions',icon:'😊'}];
+const QDB={greet:{bg:[{t:'mc',q:'What does "Tungjatjeta" mean?',o:['Hello','Goodbye','Thank you','Please'],a:'Hello',h:'The formal Albanian greeting'},{t:'mc',q:'Which word means "Thank you"?',o:['Faleminderit','Ju lutem','Mirupafshim','Po'],a:'Faleminderit',h:'Long word, worth learning'},{t:'mc',q:'What does "Jo" mean?',o:['Yes','Maybe','No','OK'],a:'No',h:'Opposite of Po'},{t:'mc',q:'What does "Po" mean?',o:['No','Yes','Hello','Please'],a:'Yes',h:'Just 2 letters!'},{t:'mc',q:'How do you say "Good morning"?',o:['Mirëmbrëma','Natën e mirë','Mirëmëngjesi','Mirëdita'],a:'Mirëmëngjesi',h:'Said first thing in the morning'},{t:'mc',q:'"Mirupafshim" means?',o:['Hello','Goodbye','How are you?','Welcome'],a:'Goodbye',h:'Used when parting'}],md:[{t:'fill',q:'___ jeni? (How are you?)',bl:'Si',o:['Si','Çfarë','Ku','Kur'],h:'2-letter question word'},{t:'fill',q:'Faleminderit ___! (Thank you very much!)',bl:'shumë',o:['pak','shumë','mirë','keq'],h:'"Very" in Albanian'},{t:'fill',q:'___ lutem! (Please!)',bl:'Ju',o:['Ju','Ti','Ne','Ata'],h:'Formal "you"'},{t:'type',q:'Type "Good afternoon" in Albanian',a:'Mirëdita',h:'Used from midday'},{t:'type',q:'Type "Good night" in Albanian',a:'Natën e mirë',h:'Before sleeping'},{t:'mc',q:'What does "Mirë" alone mean?',o:['Hello','Good / Fine','Please','Name'],a:'Good / Fine',h:'Most common positive word'}],hd:[{t:'sentence',q:'Build: "Hello, how are you?"',w:['Tungjatjeta',',','si','jeni','?'],a:'Tungjatjeta , si jeni ?',h:'Greeting first'},{t:'translate',q:'Translate:\n"My name is Alex"',a:'Quhem Alex',h:'Quhem = I am called'},{t:'type',q:'How do you say "You\'re welcome"?',a:"S'ka gjë",h:"Literally: there is nothing"},{t:'sentence',q:'Build: "Good morning, how are you?"',w:['Mirëmëngjesi',',','si','jeni','?'],a:'Mirëmëngjesi , si jeni ?',h:'Morning greeting first'},{t:'type',q:'How do you say "See you tomorrow"?',a:'Mirupafshim nesër',h:'Goodbye + tomorrow'},{t:'translate',q:'Translate:\n"Nice to meet you"',a:'Gëzuar njohjen',h:'Gëzuar = pleased'}],ex:[{t:'translate',q:'Translate:\n"Good evening! I am Albanian and I speak a little Albanian."',a:'Mirëmbrëma! Jam shqiptar dhe flas pak shqip.',h:'No hints at Extreme!'},{t:'translate',q:'Translate:\n"Hello! How are you? I am fine, thank you very much."',a:'Tungjatjeta! Si jeni? Jam mirë, faleminderit shumë.',h:'Two full sentences'},{t:'translate',q:'Translate:\n"Thank you very much, see you later!"',a:'Faleminderit shumë, mirupafshim!',h:''},{t:'type',q:'How do you say "I speak a little Albanian but I am learning"?',a:'Flas pak shqip por po mësoj',h:'Por = but'}]},nums:{bg:[{t:'mc',q:'What is "Pesë"?',o:['Three','Five','Seven','Four'],a:'Five',h:'Një, dy, tre, katër, pesë'},{t:'mc',q:'Which is "Two"?',o:['Tre','Katër','Dy','Një'],a:'Dy',h:'Just 2 letters'},{t:'mc',q:'What is "Dhjetë"?',o:['Eight','Nine','Ten','Six'],a:'Ten',h:'The number 10'},{t:'mc',q:'What is "Njëzet"?',o:['Twelve','Twenty','Eleven','Thirty'],a:'Twenty',h:'Një + zet'},{t:'mc',q:'Which is "Seven"?',o:['Gjashtë','Tetë','Shtatë','Nëntë'],a:'Shtatë',h:'Between gjashtë and tetë'},{t:'mc',q:'What is "Njëqind"?',o:['Ten','Fifty','One hundred','Twenty'],a:'One hundred',h:'Qind = hundred'}],md:[{t:'type',q:'Type the number "9" in Albanian',a:'Nëntë',h:'One before ten'},{t:'type',q:'Type the number "6" in Albanian',a:'Gjashtë',h:'Has the gj sound'},{t:'fill',q:'Kam ___ vjeç. (I am 25 years old.)',bl:'njëzet e pesë',o:['njëzet e pesë','pesëdhjetë','dhjetë','tridhjetë'],h:'20+5 joined with e'},{t:'mc',q:'How do you say "First"?',o:['Dy','I pari','Njëzet','Tre'],a:'I pari',h:'Ordinal of one'},{t:'type',q:'How do you say "one thousand"?',a:'Njëmijë',h:'Mijë = thousand'},{t:'mc',q:'What is "Gjysma"?',o:['Quarter','Third','Half','Double'],a:'Half',h:'gjysma e orës = half past'}],hd:[{t:'translate',q:'Translate:\n"I am 28 years old"',a:'Kam njëzet e tetë vjeç',h:'Use KAM not JAM for age'},{t:'sentence',q:'Build: "I want two coffees please"',w:['Dua','dy','kafe','ju','lutem'],a:'Dua dy kafe ju lutem',h:'Want + number + item + please'},{t:'type',q:'How do you ask someone\'s age?',a:'Sa vjeç jeni?',h:'Sa = how many'},{t:'translate',q:'Translate:\n"The price is fifteen euros"',a:'Çmimi është pesëmbëdhjetë euro',h:'Çmimi = the price'}],ex:[{t:'translate',q:'Translate:\n"I was born in 1998 so I am 27 years old"',a:'Jam lindur në njëmijë e nëntëqind e nëntëdhjetë e tetë, pra kam njëzet e shtatë vjeç',h:'Sound it out'},{t:'translate',q:'Translate:\n"Can I have the bill? We are three people."',a:'Mund ta marr llogarinë ju lutem? Jemi tre vetë.',h:'Llogarinë = the bill'}]},family:{bg:[{t:'mc',q:'What does "Nëna" mean?',o:['Sister','Aunt','Mother','Grandmother'],a:'Mother',h:'Female parent'},{t:'mc',q:'How do you say "Father"?',o:['Vëllai','Babai','Nipi','Gjyshi'],a:'Babai',h:'Common across languages'},{t:'mc',q:'What is "Motra"?',o:['Aunt','Mother','Sister','Cousin'],a:'Sister',h:'Female sibling'},{t:'mc',q:'What does "Gjyshi" mean?',o:['Father','Uncle','Grandfather','Brother'],a:'Grandfather',h:"Parents' father"},{t:'mc',q:'What is "Vajza"?',o:['Boy','Son','Wife','Daughter'],a:'Daughter',h:'Female child'},{t:'mc',q:'What does "Djali" mean?',o:['Father','Son','Brother','Uncle'],a:'Son',h:'Male child'}],md:[{t:'type',q:'Type "grandmother" in Albanian',a:'Gjyshja',h:'Female elder'},{t:'type',q:'Type "brother" in Albanian',a:'Vëllai',h:'Male sibling'},{t:'fill',q:'Unë kam dy ___ dhe një vëlla.',bl:'motra',o:['motra','vëllezër','kushërinj','nipërit'],h:'Plural of sister'},{t:'mc',q:'How do you say "My family"?',o:['Familja e tij','Familja ime','Familja juaj','Familja e saj'],a:'Familja ime',h:'"ime" = my'},{t:'type',q:'How do you say "Uncle" (father\'s brother)?',a:'Xhaxhai',h:'Starts with Xh'},{t:'mc',q:'What is "E dashura"?',o:['Friend','Girlfriend','Sister','Wife'],a:'Girlfriend',h:'Beloved'}],hd:[{t:'translate',q:'Translate:\n"I have a big family — two brothers and three sisters"',a:'Kam një familje të madhe — dy vëllezër dhe tre motra',h:'të madhe agrees with familje'},{t:'sentence',q:'Build: "My mother is very kind"',w:['Nëna','ime','është','shumë','e','mirë'],a:'Nëna ime është shumë e mirë',h:'"ime" comes AFTER the noun'},{t:'translate',q:'Translate:\n"How many siblings do you have?"',a:'Sa vëllezër e motra keni?',h:'Sa = how many'},{t:'type',q:'How do you say "My parents"?',a:'Prindërit e mi',h:'Prindërit = the parents'}],ex:[{t:'translate',q:'Translate:\n"My grandmother lives in Albania with my uncle and his wife"',a:'Gjyshja ime jeton në Shqipëri me xhaxhain tim dhe gruan e tij',h:'jeton = lives'},{t:'translate',q:'Translate:\n"I miss my family very much, especially my mother"',a:'Më mungon shumë familja ime, veçanërisht nëna ime',h:'Më mungon = I miss'}]},food:{bg:[{t:'mc',q:'What does "Ujë" mean?',o:['Milk','Water','Juice','Wine'],a:'Water',h:'Most essential drink'},{t:'mc',q:'Which word means "Bread"?',o:['Mish','Vezë','Bukë','Djathë'],a:'Bukë',h:'Staple Albanian food'},{t:'mc',q:'What is "Kafe"?',o:['Tea','Coffee','Juice','Water'],a:'Coffee',h:'Albanians love coffee'},{t:'mc',q:'What does "Mish" mean?',o:['Fish','Bread','Meat','Egg'],a:'Meat',h:'Protein'},{t:'mc',q:'What is "Mollë"?',o:['Orange','Banana','Apple','Grape'],a:'Apple',h:'Red or green fruit'},{t:'mc',q:'What does "Ëmbëlsirë" mean?',o:['Starter','Main','Dessert','Soup'],a:'Dessert',h:'Sweet end to meal'}],md:[{t:'type',q:'Type "milk" in Albanian',a:'Qumësht',h:'Q sounds like ch'},{t:'fill',q:'Do të marr një ___ me sheqer.',bl:'kafe',o:['kafe','çaj','ujë','lëng'],h:'Hot drink'},{t:'mc',q:'How do you say "I am hungry"?',o:['Kam etje','Jam lodhur','Kam uri','Jam ngopur'],a:'Kam uri',h:'Kam = have, uri = hunger'},{t:'type',q:'How do you say "delicious"?',a:'E shijshme',h:'After a great meal'},{t:'fill',q:'___ kushton kjo?',bl:'Sa',o:['Sa','Ku','Kur','Si'],h:'How much'},{t:'mc',q:'What is "Restorant"?',o:['Market','Bar','Restaurant','Kitchen'],a:'Restaurant',h:'Same as English'}],hd:[{t:'translate',q:'Translate:\n"I would like a table for two please"',a:'Do të doja një tavolinë për dy vetë, ju lutem',h:'Do të doja = I would like'},{t:'sentence',q:'Build: "The food was very delicious"',w:['Ushqimi','ishte','shumë','i','shijshëm'],a:'Ushqimi ishte shumë i shijshëm',h:'ishte = was'},{t:'translate',q:'Translate:\n"Can I see the menu please?"',a:'Mund ta shoh menunë, ju lutem?',h:'Mund = can'},{t:'type',q:'How do you ask for the bill?',a:'Llogarinë, ju lutem',h:'Direct and polite'}],ex:[{t:'translate',q:'Translate:\n"I don\'t eat meat, I am vegetarian. Do you have vegetarian options?"',a:'Nuk ha mish, jam vegetarian. A keni ndonjë pjatë vegjetariane?',h:'ndonjë = any'},{t:'translate',q:'Translate:\n"The food was excellent, my compliments to the chef"',a:'Ushqimi ishte i shkëlqyer, komplimente kuzinierin',h:'i shkëlqyer = excellent'}]},time:{bg:[{t:'mc',q:'What does "Sot" mean?',o:['Yesterday','Tomorrow','Today','Now'],a:'Today',h:'Current day'},{t:'mc',q:'What is "E hënë"?',o:['Tuesday','Wednesday','Monday','Thursday'],a:'Monday',h:'First working day'},{t:'mc',q:'What does "Mëngjes" mean?',o:['Evening','Afternoon','Night','Morning'],a:'Morning',h:'Start of day'},{t:'mc',q:'What is "Nesër"?',o:['Yesterday','Today','Tomorrow','Next week'],a:'Tomorrow',h:'Day after today'},{t:'mc',q:'What does "Vit" mean?',o:['Month','Day','Week','Year'],a:'Year',h:'365 days'},{t:'mc',q:'What is "E diel"?',o:['Saturday','Friday','Sunday','Monday'],a:'Sunday',h:'Day of rest'}],md:[{t:'type',q:'How do you say "yesterday"?',a:'Dje',h:'Just 3 letters'},{t:'fill',q:'Ora është ___. (It is 3 o\'clock.)',bl:'tre',o:['tre','pesë','dhjetë','dy'],h:'The number 3'},{t:'mc',q:'How do you ask "What time is it?"',o:['Sa vjeç jeni?','Sa është ora?','Çfarë ditë është?','Kur vini?'],a:'Sa është ora?',h:'Sa = how much'},{t:'type',q:'How do you say "next week"?',a:'Javën tjetër',h:'Javë = week'},{t:'fill',q:'Shihemi ___. (See you soon.)',bl:'shpejt',o:['shpejt','nesër','sot','vonë'],h:'Means soon'},{t:'mc',q:'What is "Çdo ditë"?',o:['Every night','Sometimes','Every day','Never'],a:'Every day',h:'Çdo = every'}],hd:[{t:'translate',q:'Translate:\n"I wake up at 7 every morning"',a:'Zgjohem në orën shtatë çdo mëngjes',h:'Zgjohem = I wake up'},{t:'sentence',q:'Build: "What day is it today?"',w:['Çfarë','ditë','është','sot','?'],a:'Çfarë ditë është sot ?',h:'Çfarë = what'},{t:'translate',q:'Translate:\n"We meet on Monday at 3pm"',a:'Takohemi të hënën në orën tre pasdite',h:'Takohemi = we meet'},{t:'type',q:'How do you say "I am late"?',a:'Kam vonuar',h:'Vonuar = late'}],ex:[{t:'translate',q:'Translate:\n"I have a meeting tomorrow at 9:30. Can we meet in the afternoon instead?"',a:'Kam takim nesër në orën nëntë e gjysmë. A mund të takohemi pasdite në vend?',h:'e gjysmë = half past'},{t:'translate',q:'Translate:\n"How long have you been in Albania?"',a:'Sa kohë keni qenë në Shqipëri?',h:'Sa kohë = how long'}]},direct:{bg:[{t:'mc',q:'What does "Majtas" mean?',o:['Right','Straight','Left','Back'],a:'Left',h:'Opposite of right'},{t:'mc',q:'What is "Djathtas"?',o:['Left','Back','Straight','Right'],a:'Right',h:'Opposite of left'},{t:'mc',q:'What does "Drejtë" mean?',o:['Right','Left','Straight ahead','Stop'],a:'Straight ahead',h:'No turning'},{t:'mc',q:'What is "Afër"?',o:['Far','Above','Near','Behind'],a:'Near',h:'Short distance'},{t:'mc',q:'What does "Rrugë" mean?',o:['Bridge','Park','Square','Street'],a:'Street',h:'Where cars drive'},{t:'mc',q:'What is "Larg"?',o:['Here','Near','Far','Left'],a:'Far',h:'Long distance'}],md:[{t:'type',q:'How do you ask "Where is...?"',a:'Ku është...?',h:'Two short words'},{t:'fill',q:'Kthejuni ___ te semaforët.',bl:'majtas',o:['majtas','djathtas','drejtë','prapa'],h:'Left direction'},{t:'mc',q:'What does "Kaloni urën" mean?',o:['Turn left','Stop here','Cross the bridge','Go straight'],a:'Cross the bridge',h:'Kaloni = cross'},{t:'type',q:'How do you say "Stop here please"?',a:'Ndalni këtu, ju lutem',h:'Ndalni = stop'},{t:'fill',q:'Vazhdoni ___ për dyqind metra.',bl:'drejtë',o:['drejtë','majtas','djathtas','prapa'],h:'Straight'},{t:'mc',q:'What is "Ndërtesa"?',o:['Street','Traffic light','Building','Park'],a:'Building',h:'Large structure'}],hd:[{t:'translate',q:'Translate:\n"Excuse me, where is the nearest bus stop?"',a:'Më falni, ku është stacioni i autobusit më i afërt?',h:'Më falni = excuse me'},{t:'sentence',q:'Build: "Turn right at the traffic lights"',w:['Kthehuni','djathtas','te','semaforët'],a:'Kthehuni djathtas te semaforët',h:'Direction after verb'},{t:'translate',q:'Translate:\n"I am lost, can you help me?"',a:'Jam i humbur, mund të më ndihmoni?',h:'i humbur = lost'},{t:'type',q:'How do you say "5 minutes on foot"?',a:'Pesë minuta me këmbë',h:'me këmbë = on foot'}],ex:[{t:'translate',q:'Translate:\n"Go straight past the church, turn left at the roundabout, hotel is on your right"',a:'Shkoni drejtë pranë kishës, kthehuni majtas te rrethrrotullimi dhe hoteli është në të djathtën tuaj',h:'pranë = near/past'},{t:'translate',q:'Translate:\n"How far is the city centre from here?"',a:'Sa larg është qendra e qytetit nga këtu?',h:'qendra = centre'}]},work:{bg:[{t:'mc',q:'What does "Mjek" mean?',o:['Lawyer','Teacher','Doctor','Engineer'],a:'Doctor',h:'Works in hospital'},{t:'mc',q:'What is "Mësues"?',o:['Doctor','Engineer','Teacher','Boss'],a:'Teacher',h:'Works in school'},{t:'mc',q:'What does "Punë" mean?',o:['Money','Office','Work','Meeting'],a:'Work',h:'What you do 9-5'},{t:'mc',q:'What is "Zyrë"?',o:['Factory','School','Shop','Office'],a:'Office',h:'Work at a desk'},{t:'mc',q:'What does "Para" mean?',o:['Time','People','Work','Money'],a:'Money',h:'Cash'},{t:'mc',q:'What is "Shef"?',o:['Employee','Client','Colleague','Boss'],a:'Boss',h:'In charge'}],md:[{t:'type',q:'How do you say "employee"?',a:'Punonjës',h:'From punë (work)'},{t:'fill',q:'Çfarë ___ bëni?',bl:'punë',o:['punë','ditë','orë','vend'],h:'Work'},{t:'mc',q:'How do you say "I work in an office"?',o:['Punoj në shkollë','Punoj në zyrë','Punoj në spital','Punoj në dyqan'],a:'Punoj në zyrë',h:'Punoj = I work'},{t:'type',q:'How do you say "meeting"?',a:'Takim',h:'Gathering of people'},{t:'fill',q:'Sa ___ fitoni?',bl:'para',o:['para','punë','kohë','ditë'],h:'Money'},{t:'mc',q:'What is "Pushime"?',o:['Work','Overtime','Holidays','Salary'],a:'Holidays',h:'Time off'}],hd:[{t:'translate',q:'Translate:\n"I am an engineer and I work in London"',a:'Jam inxhinier dhe punoj në Londër',h:'SVO structure'},{t:'sentence',q:'Build: "What do you do for a living?"',w:['Çfarë','pune','bëni','për','jetesë','?'],a:'Çfarë pune bëni për jetesë ?',h:'Pune = work (genitive)'},{t:'translate',q:'Translate:\n"I have been working here for 3 years"',a:'Kam punuar këtu për tre vjet',h:'Kam punuar = I have worked'},{t:'type',q:'How do you say "I am looking for a job"?',a:'Po kërkoj punë',h:'Po kërkoj = I am looking for'}],ex:[{t:'translate',q:'Translate:\n"I have a job interview tomorrow and I am very nervous"',a:'Kam intervistë pune nesër dhe jam shumë nervoz',h:'intervistë pune = job interview'},{t:'translate',q:'Translate:\n"My salary increased this year and I am very happy"',a:'Rroga ime u rrit këtë vit dhe jam shumë i lumtur',h:'Rroga = salary'}]},colors:{bg:[{t:'mc',q:'What is "I kuq"?',o:['Blue','Green','Red','Black'],a:'Red',h:'Albanian flag colour'},{t:'mc',q:'What does "I kaltër" mean?',o:['Green','Red','Yellow','Blue'],a:'Blue',h:'Color of clear sky'},{t:'mc',q:'What is "I gjelbër"?',o:['Yellow','Brown','Green','Orange'],a:'Green',h:'Grass and leaves'},{t:'mc',q:'What does "I bardhë" mean?',o:['Black','Gray','White','Pink'],a:'White',h:'Color of snow'},{t:'mc',q:'What is "I zi"?',o:['White','Gray','Blue','Black'],a:'Black',h:'Also on Albanian flag'},{t:'mc',q:'What does "I verdhë" mean?',o:['Orange','Yellow','Green','Gold'],a:'Yellow',h:'Color of sun'}],md:[{t:'type',q:'How do you say "the red car"?',a:'Makina e kuqe',h:'i kuq becomes e kuqe with feminine nouns'},{t:'fill',q:'Trëndafili është ___.',bl:'i kuq',o:['i kuq','i kaltër','i gjelbër','i bardhë'],h:'Roses are...'},{t:'mc',q:'What is "Shtëpia e bardhë"?',o:['Blue house','Big house','White house','Old house'],a:'White house',h:'e bardhë = white (feminine)'},{t:'type',q:'How do you say "dark blue"?',a:'Kaltër e errët',h:'errët = dark'},{t:'fill',q:'Qielli është ___.',bl:'i kaltër',o:['i kaltër','i kuq','i gjelbër','i verdhë'],h:'Look up!'},{t:'mc',q:'What does "Ngjyrë" mean?',o:['Paint','Picture','Color','Shape'],a:'Color',h:'General word for color'}],hd:[{t:'translate',q:'Translate:\n"I like the blue shirt, not the red one"',a:'Më pëlqen këmisha e kaltër, jo ajo e kuqja',h:'Më pëlqen = I like'},{t:'sentence',q:'Build: "What is your favourite color?"',w:['Cila','është','ngjyra','jote','e','preferuar','?'],a:'Cila është ngjyra jote e preferuar ?',h:'Cila = which (feminine)'},{t:'translate',q:'Translate:\n"The Albanian flag is red and black"',a:'Flamuri shqiptar është i kuq dhe i zi',h:'Flamuri = the flag'},{t:'type',q:'How do you say "I am wearing a white shirt"?',a:'Vesh një këmishë të bardhë',h:'Vesh = I wear'}],ex:[{t:'translate',q:'Translate:\n"He was wearing a dark green jacket and black trousers"',a:'Kishte një xhaketë jeshile të errët dhe pantallona të zeza',h:'kishte = was wearing'},{t:'translate',q:'Translate:\n"I prefer bright colors like yellow and orange"',a:'Preferoj ngjyra të ndezura si e verdha dhe portokalli',h:'të ndezura = bright'}]},body:{bg:[{t:'mc',q:'What does "Kokë" mean?',o:['Arm','Leg','Head','Back'],a:'Head',h:'Top of body'},{t:'mc',q:'What is "Dorë"?',o:['Foot','Hand','Eye','Ear'],a:'Hand',h:'You write with it'},{t:'mc',q:'What does "Sy" mean?',o:['Ear','Nose','Mouth','Eye'],a:'Eye',h:'You see with it'},{t:'mc',q:'What is "Gojë"?',o:['Ear','Mouth','Nose','Chin'],a:'Mouth',h:'You eat with it'},{t:'mc',q:'What does "Dhëmbë" mean?',o:['Hair','Finger','Tooth','Nail'],a:'Tooth',h:'Brush twice a day'},{t:'mc',q:'What is "Zemër"?',o:['Liver','Kidney','Heart','Lung'],a:'Heart',h:'Also means love'}],md:[{t:'type',q:'How do you say "My head hurts"?',a:'Më dhemb koka',h:'Më dhemb = it hurts me'},{t:'fill',q:'Ke ___ të lartë.',bl:'temperaturë',o:['temperaturë','dhimbje','lodhje','gripin'],h:'High temperature'},{t:'mc',q:'How do you say "I feel sick"?',o:['Jam mirë','Ndihem keq','Jam i lumtur','Kam uri'],a:'Ndihem keq',h:'Ndihem = I feel'},{t:'type',q:'How do you say "I need a doctor"?',a:'Kam nevojë për mjek',h:'Kam nevojë = I need'},{t:'fill',q:'Kam ___ fyti.',bl:'dhimbje',o:['dhimbje','gripin','ethe','kollë'],h:'Dhimbje = pain'},{t:'mc',q:'What is "Kollë"?',o:['Fever','Cough','Cold','Headache'],a:'Cough',h:'Sound when sick'}],hd:[{t:'translate',q:'Translate:\n"I have a headache and a slight fever"',a:'Kam dhimbje koke dhe pak ethe',h:'pak = slight'},{t:'sentence',q:'Build: "I broke my arm and need to go to hospital"',w:['Theva','dorën','duhet','të','shkoj','në','spital'],a:'Theva dorën duhet të shkoj në spital',h:'Theva = I broke'},{t:'translate',q:'Translate:\n"Are you allergic to any medication?"',a:'Jeni alergjik ndaj ndonjë medikamenti?',h:'alergjik = allergic'},{t:'type',q:'How do you say "Call an ambulance"?',a:'Thirrni ambulancën',h:'Thirrni = call'}],ex:[{t:'translate',q:'Translate:\n"I have been feeling unwell for three days — cough, sore throat, very tired"',a:'Ndihem keq prej tre ditësh, kam kollë, dhimbje fyti dhe jam shumë i lodhur',h:'prej = for/since'},{t:'translate',q:'Translate:\n"The doctor said I need to rest for a week and take tablets twice a day"',a:'Mjeku tha se duhet të pushoj për një javë dhe të marr këto tableta dy herë në ditë',h:'dy herë = twice'}]},emotions:{bg:[{t:'mc',q:'What does "Lumtur" mean?',o:['Sad','Angry','Happy','Scared'],a:'Happy',h:'Positive feeling'},{t:'mc',q:'What is "I trishtuar"?',o:['Happy','Excited','Sad','Calm'],a:'Sad',h:'Opposite of happy'},{t:'mc',q:'What does "I zemëruar" mean?',o:['Tired','Excited','Scared','Angry'],a:'Angry',h:'Rage'},{t:'mc',q:'What is "I lodhur"?',o:['Hungry','Angry','Happy','Tired'],a:'Tired',h:'Needs rest'},{t:'mc',q:'What does "I frikësuar" mean?',o:['Brave','Scared','Angry','Bored'],a:'Scared',h:'Fear'},{t:'mc',q:'What is "I mërzitur"?',o:['Excited','Happy','Bored','In love'],a:'Bored',h:'Nothing to do'}],md:[{t:'type',q:'How do you say "I am very happy"?',a:'Jam shumë i lumtur',h:'i lumtur (m) / e lumtur (f)'},{t:'fill',q:'Jam ___ të të shoh!',bl:'i lumtur',o:['i lumtur','i trishtuar','i zemëruar','i lodhur'],h:'Happy to see you'},{t:'mc',q:'How do you say "I love you"?',o:['Të dua shumë','Të urrej','Jam mirë','Të falënderoj'],a:'Të dua shumë',h:'Most important phrase!'},{t:'type',q:'How do you say "I miss you"?',a:'Më mungon',h:'You are missing to me'},{t:'fill',q:'Jam shumë ___ për ty.',bl:'krenar',o:['krenar','mërzitur','trishtuar','lodhur'],h:'Pride'},{t:'mc',q:'What does "Shpresoj" mean?',o:['I believe','I hope','I think','I feel'],a:'I hope',h:'Optimistic'}],hd:[{t:'translate',q:'Translate:\n"I am feeling very anxious about the exam tomorrow"',a:'Ndihem shumë i shqetësuar për provimin nesër',h:'i shqetësuar = anxious'},{t:'sentence',q:'Build: "Don\'t worry, everything will be fine"',w:['Mos','u','shqetëso',',','gjithçka','do','të','jetë','mirë'],a:'Mos u shqetëso , gjithçka do të jetë mirë',h:'Mos = do not'},{t:'translate',q:'Translate:\n"She looked very sad, I think she was crying"',a:'Ajo dukej shumë e trishtuar, mendoj se po qante',h:'dukej = looked'},{t:'type',q:'How do you say "I am so proud of you"?',a:'Jam aq krenar për ty',h:'aq = so much'}],ex:[{t:'translate',q:'Translate:\n"Even though I was nervous, I felt proud finishing in Albanian without switching to English"',a:'Edhe pse isha nervoz, ndihesha shumë krenar kur mbarova të flas shqip pa kaluar në anglisht',h:'edhe pse = even though'},{t:'translate',q:'Translate:\n"I feel deeply connected to Albania even though I grew up in England"',a:'Ndihem i lidhur thellë me Shqipërinë edhe pse u rrita në Angli',h:'i lidhur = connected'}]}};
+const SBP=[{p:'Possessives come AFTER the noun',a:'Nëna ime.',e:'My mother.',s:'[Noun] + [Possessive]',n:'This trips up every diaspora Albanian. You say "mother mine" not "my mother". Nëna ime (mother mine), Babai im (father mine). If you say "Ime nëna" — that\'s wrong and every Albanian will notice.'},{p:'Subject + Verb + Object',a:'Unë ha bukë.',e:'I eat bread.',s:'[Subject] + [Verb] + [Object]',n:'Same word order as English. But the subject pronoun almost always gets dropped. "Ha bukë" alone is perfect — the verb ending already tells you it\'s "I".'},{p:'To be: Jam / Është / Jemi',a:'Jam i lumtur.',e:'I am happy.',s:'Jam / është / jemi + [Adjective]',n:'Adjectives change with gender. Add "i" before masculine adjectives, "e" before feminine. Jam i lumtur (male). Jam e lumtur (female). You cannot skip the i/e.'},{p:'Negative: Nuk + Verb',a:'Nuk flas shqip.',e:"I don't speak Albanian.",s:'Nuk + [Verb]',n:'"Nuk" does all the heavy lifting. Put it directly before the verb and you\'re done. Nuk flas, nuk kuptoj, nuk di. One rule, zero exceptions.'},{p:'Questions: A + Verb',a:'A flet shqip?',e:'Do you speak Albanian?',s:'A + [Verb] + ?',n:'Put "A" at the start of any sentence and it becomes a yes/no question. A flet = Do you speak? A keni = Do you have? One letter changes everything.'},{p:'Want to: Dua të + Verb',a:'Dua të shkoj në Shqipëri.',e:'I want to go to Albania.',s:'Dua të + [Verb]',n:'"Dua të" unlocks everything. Dua të ha (want to eat), dua të flas (want to speak), dua të mësoj (want to learn). Master this and you can express almost anything.'},{p:'Age uses KAM not JAM',a:'Kam njëzet e pesë vjeç.',e:'I am 25 years old.',s:'Kam + [number] + vjeç',n:'Albanians say "I HAVE years", not "I AM years old". Kam, not Jam. "Jam 25 vjeç" sounds completely wrong to native speakers. This is one of the most common mistakes.'},{p:'"The" is a suffix, not a word',a:'Libër → Libri',e:'A book → The book',s:'[word] + suffix (i/a/u/ja/t)',n:'Albanian has no separate word for "the". It sticks to the end of the noun. Libër becomes Libri, shtëpi becomes shtëpia. Heritage speakers often forget this because English works so differently.'}];
+const SBE=[{q:'Build: "I speak Albanian"',w:['Flas','unë','shqip','mirë'],a:'Flas shqip',h:'Drop "unë" — the verb already shows who is speaking'},{q:'Build: "She is beautiful"',w:['Ajo','është','e','bukur','shumë'],a:'Ajo është e bukur',h:'"e bukur" = beautiful (feminine — the e is not optional)'},{q:'Build: "I want water"',w:['Dua','ujë','pak','shumë'],a:'Dua ujë',h:'Want + object. Subject dropped.'},{q:'Build: "We are Albanian"',w:['Jemi','shqiptarë','ne','shumë'],a:'Jemi shqiptarë',h:'Jemi = we are'},{q:'Build: "I don\'t understand"',w:['Nuk','kuptoj','flas','dua'],a:'Nuk kuptoj',h:'Nuk directly before the verb'},{q:'Build: "I am fine, thank you"',w:['Jam','mirë','shumë','faleminderit'],a:'Jam mirë faleminderit',h:'State + thank you'}];
+const SBM=[{q:'Build: "I want to go to Albania"',w:['Dua','të','shkoj','në','Shqipëri','nesër'],a:'Dua të shkoj në Shqipëri',h:'"Dua të" = I want to'},{q:'Build: "My mother is very kind"',w:['Nëna','ime','është','shumë','e','mirë','gjithmonë'],a:'Nëna ime është shumë e mirë',h:'"ime" comes AFTER the noun — not before!'},{q:'Build: "Do you speak Albanian?"',w:['A','flet','ti','shqip','mirë','?'],a:'A flet shqip ?',h:'"A" at the start = yes/no question'},{q:'Build: "I don\'t eat meat, I am vegetarian"',w:['Nuk','ha','mish',',','jam','vegetarian'],a:'Nuk ha mish , jam vegetarian',h:'Nuk negates the first verb'},{q:'Build: "The food was very delicious"',w:['Ushqimi','ishte','shumë','i','shijshëm','mirë'],a:'Ushqimi ishte shumë i shijshëm',h:'Notice "i" before the adjective'},{q:'Build: "I have been living here for 5 years"',w:['Jetoj','këtu','prej','pesë','vitesh','tani'],a:'Jetoj këtu prej pesë vitesh',h:'"prej" = for (duration)'}];
+const SBA=[{q:'Build: "Even though I grew up in England, I feel Albanian in my heart"',w:['Edhe','pse','u','rrita','në','Angli',',','ndihem','shqiptar','në','zemër'],a:'Edhe pse u rrita në Angli , ndihem shqiptar në zemër',h:'This is YOUR sentence. Own it.'},{q:'Build: "I want to learn Albanian properly so I can speak with my family"',w:['Dua','të','mësoj','shqip','siç','duhet','që','të','flas','me','familjen','time'],a:'Dua të mësoj shqip siç duhet që të flas me familjen time',h:'"siç duhet" = properly, "familjen time" = my family'},{q:'Build: "Can you speak more slowly please? I am still learning."',w:['Mund','të','flisni','më','ngadalë','ju','lutem','?','Jam','duke','mësuar','ende','.'],a:'Mund të flisni më ngadalë ju lutem ? Jam duke mësuar ende .',h:'"duke mësuar" = in the process of learning'},{q:'Build: "If I practise every day I will speak Albanian fluently"',w:['Nëse','ushtroj','çdo','ditë','do','të','flas','shqip','rrjedhshëm'],a:'Nëse ushtroj çdo ditë do të flas shqip rrjedhshëm',h:'"rrjedhshëm" = fluently'}];
+const FCD={gr:[{a:'Tungjatjeta',e:'Hello (formal)',p:'toon-yat-YEH-ta'},{a:'Mirëdita',e:'Good afternoon',p:'mee-REH-dee-ta'},{a:'Mirëmëngjesi',e:'Good morning',p:'mee-reh-MUHN-yes-ee'},{a:'Mirëmbrëma',e:'Good evening',p:'mee-reh-MBREH-ma'},{a:'Natën e mirë',e:'Good night',p:'NA-tuhn eh MEE-ruh'},{a:'Faleminderit',e:'Thank you',p:'fa-leh-min-DEH-reet'},{a:'Ju lutem',e:'Please',p:'yoo LOO-tehm'},{a:'Mirupafshim',e:'Goodbye',p:'mee-roo-PAF-sheem'},{a:"S'ka gjë",e:"You're welcome",p:"ska GYUH"},{a:'Si jeni?',e:'How are you?',p:'see YEH-nee'}],nm:[{a:'Një',e:'One',p:'nyuh'},{a:'Dy',e:'Two',p:'doo'},{a:'Tre',e:'Three',p:'treh'},{a:'Katër',e:'Four',p:'KA-tuhr'},{a:'Pesë',e:'Five',p:'PEH-suh'},{a:'Gjashtë',e:'Six',p:'GYASH-tuh'},{a:'Shtatë',e:'Seven',p:'SHTA-tuh'},{a:'Tetë',e:'Eight',p:'TEH-tuh'},{a:'Nëntë',e:'Nine',p:'NUHN-tuh'},{a:'Dhjetë',e:'Ten',p:'DHYEH-tuh'},{a:'Njëzet',e:'Twenty',p:'nyuh-ZET'},{a:'Njëqind',e:'One hundred',p:'nyuh-CHIND'}],fm:[{a:'Nëna',e:'Mother',p:'NUH-na'},{a:'Babai',e:'Father',p:'BA-ba-ee'},{a:'Vëllai',e:'Brother',p:'VUHL-la-ee'},{a:'Motra',e:'Sister',p:'MO-tra'},{a:'Gjyshi',e:'Grandfather',p:'GYOO-shee'},{a:'Gjyshja',e:'Grandmother',p:'GYOOSH-ya'},{a:'Djali',e:'Son / Boy',p:'DYA-lee'},{a:'Vajza',e:'Daughter / Girl',p:'VAY-za'},{a:'Bashkëshortja',e:'Wife',p:'bash-kuh-SHOR-tya'},{a:'Bashkëshorti',e:'Husband',p:'bash-kuh-SHOR-tee'}],fd:[{a:'Ujë',e:'Water',p:'OO-yuh'},{a:'Bukë',e:'Bread',p:'BOO-kuh'},{a:'Mish',e:'Meat',p:'meesh'},{a:'Qumësht',e:'Milk',p:'CHOO-muhsht'},{a:'Kafe',e:'Coffee',p:'KA-feh'},{a:'Mollë',e:'Apple',p:'MOL-luh'},{a:'Djathë',e:'Cheese',p:'DYA-thuh'},{a:'Verë',e:'Wine',p:'VEH-ruh'},{a:'Peshk',e:'Fish',p:'peshk'},{a:'Vezë',e:'Egg',p:'VEH-zuh'}],vb:[{a:'Jam',e:'I am',p:'yam'},{a:'Kam',e:'I have',p:'kam'},{a:'Dua',e:'I want',p:'DOO-a'},{a:'Shkoj',e:'I go',p:'shKOY'},{a:'Flas',e:'I speak',p:'flas'},{a:'Kuptoj',e:'I understand',p:'koop-TOY'},{a:'Ha',e:'I eat',p:'ha'},{a:'Pi',e:'I drink',p:'pee'},{a:'Mendoj',e:'I think',p:'men-DOY'},{a:'Di',e:'I know',p:'dee'},{a:'Punoj',e:'I work',p:'poo-NOY'},{a:'Jetoj',e:'I live',p:'yeh-TOY'},{a:'Ndihem',e:'I feel',p:'N-dee-hem'},{a:'Dëgjoj',e:'I listen',p:'duh-GYOY'}],aj:[{a:'Mirë',e:'Good',p:'MEE-ruh'},{a:'Keq',e:'Bad',p:'kehch'},{a:'Bukur',e:'Beautiful',p:'BOO-koor'},{a:'Madh',e:'Big',p:'madh'},{a:'Vogël',e:'Small',p:'VOH-guhl'},{a:'Lumtur',e:'Happy',p:'LOOM-toor'},{a:'I ri',e:'Young / New',p:'ee ree'},{a:'Vjetër',e:'Old',p:'VYEH-tuhr'},{a:'Shumë',e:'Very / A lot',p:'SHOO-muh'},{a:'Pak',e:'A little',p:'pak'}],tm:[{a:'Sot',e:'Today',p:'sot'},{a:'Nesër',e:'Tomorrow',p:'NEH-suhr'},{a:'Dje',e:'Yesterday',p:'dyeh'},{a:'Tani',e:'Now',p:'TA-nee'},{a:'Mëngjes',e:'Morning',p:'MUHN-yes'},{a:'Pasdite',e:'Afternoon',p:'pas-DEE-teh'},{a:'Mbrëmje',e:'Evening',p:'M-BREH-myeh'},{a:'Natë',e:'Night',p:'NA-tuh'},{a:'Javë',e:'Week',p:'YA-vuh'},{a:'Muaj',e:'Month',p:'MOO-ay'},{a:'Vit',e:'Year',p:'veet'},{a:'Orë',e:'Hour',p:'OH-ruh'}],bd:[{a:'Kokë',e:'Head',p:'KOH-kuh'},{a:'Dorë',e:'Hand / Arm',p:'DOH-ruh'},{a:'Sy',e:'Eye',p:'soo'},{a:'Vesh',e:'Ear',p:'vesh'},{a:'Hundë',e:'Nose',p:'HOON-duh'},{a:'Gojë',e:'Mouth',p:'GOH-yuh'},{a:'Zemër',e:'Heart',p:'ZEH-muhr'},{a:'Dhëmbë',e:'Teeth',p:'DHEHM-buh'},{a:'Këmbë',e:'Leg / Foot',p:'KUHM-buh'},{a:'Shpinë',e:'Back',p:'SHPEE-nuh'}]};
+const PHS=[{c:'Introductions',i:[{a:'Si quheni?',e:"What's your name? (formal)"},{a:'Quhem [emri].',e:"My name is [name]."},{a:'Nga jeni?',e:"Where are you from?"},{a:'Jam shqiptar, por u rrita në Angli.',e:"I'm Albanian but grew up in England."},{a:'Flas pak shqip.',e:"I speak a little Albanian."},{a:'A flisni anglisht?',e:"Do you speak English?"},{a:'Po mësoj shqip.',e:"I'm learning Albanian."}]},{c:'Everyday chat',i:[{a:'Çfarë keni bërë sot?',e:"What have you done today?"},{a:'Si po shkon?',e:"How's it going?"},{a:'Gjithçka mirë, faleminderit.',e:"All good, thank you."},{a:"Ç'lajmë?",e:"What's up / what's the news?"},{a:'Mos u shqetëso!',e:"Don't worry!"},{a:'Kjo është e mrekullueshme!',e:"This is wonderful!"}]},{c:'Food & restaurants',i:[{a:'Mund të shoh menunë, ju lutem?',e:"Can I see the menu?"},{a:'Do të doja ta provoja këtë.',e:"I'd like to try this."},{a:'Ishte shumë e shijshme!',e:"It was very delicious!"},{a:'Llogarinë, ju lutem.',e:"The bill, please."},{a:'Nuk ha mish.',e:"I don't eat meat."},{a:'Gëzuar!',e:"Cheers!"}]},{c:'Feelings & love',i:[{a:'Të dua shumë!',e:"I love you very much!"},{a:'Më mungon shumë.',e:"I miss you so much."},{a:'Jam krenar për ty.',e:"I'm proud of you."},{a:'Gëzuar ditëlindjen!',e:"Happy birthday!"},{a:'Urime!',e:"Congratulations!"},{a:'Ndihem i lidhur me Shqipërinë.',e:"I feel connected to Albania."}]},{c:'Learner phrases',i:[{a:'Nuk kuptoj.',e:"I don't understand."},{a:'Mund të flisni më ngadalë?',e:"Can you speak more slowly?"},{a:'Si thuhet kjo shqip?',e:"How do you say this in Albanian?"},{a:'Mund ta përsëritni?',e:"Can you repeat that?"},{a:'Flas gjysmë shqip, gjysmë anglisht!',e:"I speak half Albanian, half English! 😅"},{a:'Po mësohem, faleminderit për durim!',e:"I'm learning — thanks for your patience!"}]}];
+let ST=JSON.parse(localStorage.getItem('msq6')||'null')||{xp:0,streak:0,lives:5,dn:{bg:{},md:{},hd:{},ex:{}},fcSn:0,sbDn:0,lessDay:0,xpDay:0,lastD:''};
+const td2=new Date().toDateString();
+if(ST.lastD!==td2){ST.lessDay=0;ST.xpDay=0;ST.lastD=td2;}
+let CUR={lv:'bg',tp:'greet',qi:0,qs:[],sc:0,ans:false,tls:[]};
+let curLv='bg';let fcD=[],fcC=0;let sbMd='pat';const sbT={};
+function sv(){localStorage.setItem('msq6',JSON.stringify(ST));}
+function gp(pg,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('act'));
+  document.getElementById('pg-'+pg).classList.add('act');
+  const nb=btn||document.querySelector(`.ni[data-p="${pg}"]`);
+  if(nb)nb.classList.add('act');
+  if(pg==='home')updH();if(pg==='learn')rndrPth();if(pg==='sentences')rndrSB();
+  if(pg==='flash')loadFC();if(pg==='phrases')rndrPh();if(pg==='progress')rndrPr();
+}
+function updH(){
+  const h=new Date().getHours();
+  document.getElementById('gtm').textContent=h<12?'Good morning ☀️':h<17?'Good afternoon 🌤️':h<21?'Good evening 🌆':'Late night session 🌙';
+  document.getElementById('hS').textContent=ST.streak;document.getElementById('hX').textContent=ST.xp;document.getElementById('hL').textContent=ST.lives;
+  document.getElementById('hSn').textContent=ST.streak;document.getElementById('hXt').textContent=ST.xpDay;
+  const lv=Math.floor(ST.xp/200)+1,inL=ST.xp%200,pc=(inL/200*100).toFixed(1);
+  document.getElementById('xLv').textContent=lv;document.getElementById('xVl').textContent=ST.xp;
+  document.getElementById('xFl').style.width=pc+'%';document.getElementById('xSL').textContent=inL+'/200';
+  document.getElementById('xSR').textContent=(200-inL)+' XP to level '+(lv+1);
+  const td=Object.values(ST.dn).reduce((a,l)=>a+Object.keys(l).length,0);
+  document.getElementById('stL').textContent=td;document.getElementById('stX').textContent=ST.xp;document.getElementById('stW').textContent=Math.min(td*12,480);
+  const g1=ST.lessDay>=1,g2=ST.sbDn>=3,g3=ST.fcSn>=10;
+  [[g1,'g1','gr1'],[g2,'g2','gr2'],[g3,'g3','gr3']].forEach(([d,gi,ri])=>{
+    const el=document.getElementById(gi),rng=document.getElementById(ri);
+    if(d){el.classList.add('done');rng.innerHTML='✓';rng.style.color='#fff';}else{el.classList.remove('done');rng.innerHTML='';rng.style.color='';}
+  });
+}
+const LVC={bg:'var(--grn)',md:'var(--blu)',hd:'var(--gold)',ex:'var(--red)'};
+function setLv(lv,btn){curLv=lv;document.querySelectorAll('.lvt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');rndrPth();}
+function rndrPth(){
+  const dn=Object.keys(ST.dn[curLv]).length,tot=TOPICS.length,pc=Math.round(dn/tot*100),col=LVC[curLv];
+  let h=`<div style="background:#fff;border:1px solid var(--bg3);border-radius:14px;padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)">
+    <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--ink3);margin-bottom:6px">${{bg:'Beginner',md:'Medium',hd:'Hard',ex:'Extreme'}[curLv]}</div>
+    <div style="background:var(--bg3);border-radius:4px;height:6px;overflow:hidden"><div style="width:${pc}%;height:100%;background:${col};border-radius:4px;transition:width 1s ease"></div></div>
+    <div style="font-size:11px;color:var(--ink3);margin-top:5px">${dn} of ${tot} topics done</div></div>
+    <div style="font-family:'DM Serif Display',serif;font-size:28px;color:${col}">${pc}%</div>
+  </div><div class="pw"><div class="pl"></div>`;
+  const secs=[{l:'The basics',t:['greet','nums','family','food']},{l:'Everyday life',t:['time','direct','work','colors']},{l:'Going deeper',t:['body','emotions']}];
+  let ti=0;
+  secs.forEach(s=>{
+    h+=`<div class="psdiv"><div class="psdin"><span class="psdt">${s.l}</span></div></div>`;
+    s.t.forEach(tid=>{
+      const tp=TOPICS.find(x=>x.id===tid);if(!tp)return;
+      const isDn=ST.dn[curLv][tid],isCur=!isDn&&ti===dn,isLk=!isDn&&!isCur;
+      const cls=isDn?'dn':isCur?'cur':'';
+      h+=`<div class="pnd"><div class="nb ${cls} ${isLk?'lk':''}" onclick="${!isLk?`stTp('${curLv}','${tid}')`:''}" >
+        <div class="nc">${tp.icon}${isLk?'<div class="nlk">🔒</div>':''}</div>
+        ${isDn?`<div class="nst">${'⭐'.repeat(isDn)}${'☆'.repeat(3-isDn)}</div>`:isCur?`<div style="font-size:10px;color:var(--red);font-weight:700;margin-top:1px">Start →</div>`:''}
+        <div class="nnm">${tp.name}</div>
+      </div></div>`;ti++;
+    });
+  });
+  h+='</div>';document.getElementById('pathWrap').innerHTML=h;
+}
+function stTp(lv,tid){
+  const pool=QDB[tid]?.[lv];if(!pool?.length){alert('More questions coming soon!');return;}
+  CUR={lv,tp:tid,qi:0,qs:shfl([...pool]),sc:0,ans:false,tls:[]};
+  document.getElementById('qOv').classList.add('open');
+  document.getElementById('qPF').className='qpf '+lv;rndrQ();
+}
+function clsQ(){document.getElementById('qOv').classList.remove('open');rndrPth();}
+function rndrLv(){const l=Math.max(0,ST.lives);document.getElementById('qLv').innerHTML='❤️'.repeat(l)+'🖤'.repeat(Math.max(0,5-l));}
+function rndrQ(){
+  const q=CUR.qs[CUR.qi],tot=CUR.qs.length,pc=(CUR.qi/tot*100).toFixed(0);
+  document.getElementById('qPF').style.width=pc+'%';rndrLv();
+  const tmap={mc:'Multiple choice',fill:'Fill the blank',type:'Type the answer',sentence:'Build the sentence',translate:'Translate'};
+  let inner='';
+  if(q.t==='mc'){const ops=shfl([...q.o]);inner=ops.map(o=>`<div class="mco" onclick="doMC(this,'${esc(o)}','${esc(q.a)}')">${o}<div class="mcrng"></div></div>`).join('');}
+  else if(q.t==='fill'){inner=`<div class="fsen">${q.q.replace('___',`<span class="fbl" id="fbl">___</span>`)}</div>`+shfl([...q.o]).map(o=>`<div class="mco" onclick="doFill(this,'${esc(o)}','${esc(q.bl)}')">${o}<div class="mcrng"></div></div>`).join('');}
+  else if(q.t==='type'){inner=`<input class="tf" id="tIn" placeholder="Type in Albanian..." onkeydown="if(event.key==='Enter')doAns()"><div class="ash" id="ash">Answer: ${q.a}</div>`;}
+  else if(q.t==='sentence'){CUR.tls=[];const ws=shfl([...q.w]);inner=`<div class="sdrp" id="sdrp"><span class="dph">Tap words below to build the sentence...</span></div><div class="wbk"><div class="wbl">Word bank — tap to add or remove:</div>${ws.map((w,i)=>`<div class="wt" id="wt${i}" onclick="togTl('${esc(w)}',${i})">${w}</div>`).join('')}</div>`;}
+  else if(q.t==='translate'){inner=`<div class="trfr"><div class="trlg">English → Albanian</div><div class="trtx">${q.q.replace(/\n/g,'<br>')}</div></div><textarea class="trin" id="trIn" placeholder="Write your Albanian translation..."></textarea><div class="ash" id="ash">Suggested: ${q.a}</div>`;}
+  document.getElementById('qBdy').innerHTML=`<div class="qchp">${tmap[q.t]||q.t}</div><div class="qq">${q.q.replace(/\n/g,'<br>')}</div>${q.h?`<div class="qhn">💡 ${q.h}</div>`:''}${inner}<div class="fb" id="fb"></div><div style="height:20px"></div>`;
+  const bt=document.getElementById('qBts');
+  if(['type','sentence','translate'].includes(q.t))bt.innerHTML=`<button class="btn br bsm" onclick="doAns()">Check</button><button class="btn bgr bsm" id="nxt" style="display:none" onclick="nxtQ()">Next →</button>`;
+  else bt.innerHTML=`<button class="btn bgr bsm" id="nxt" style="display:none" onclick="nxtQ()">Next →</button>`;
+  CUR.ans=false;
+  if(q.t==='type')setTimeout(()=>{const i=document.getElementById('tIn');if(i)i.focus();},200);
+  if(q.t==='translate')setTimeout(()=>{const i=document.getElementById('trIn');if(i)i.focus();},200);
+}
+function doMC(el,sel,cor){
+  if(CUR.ans)return;CUR.ans=true;
+  document.querySelectorAll('.mco').forEach(b=>b.classList.add('dis'));
+  const ok=sel===cor;el.classList.add(ok?'ok':'no');el.querySelector('.mcrng').innerHTML=ok?'✓':'✕';
+  if(!ok)document.querySelectorAll('.mco').forEach(b=>{const t=b.firstChild?.textContent?.trim();if(t===cor)b.classList.add('ok');});
+  shwFb(ok,cor);if(ok){CUR.sc++;awXP(10);}else lsLv();shwNxt();
+}
+function doFill(el,sel,bl){
+  if(CUR.ans)return;CUR.ans=true;
+  document.querySelectorAll('.mco').forEach(b=>b.classList.add('dis'));
+  const ok=nm(sel)===nm(bl);el.classList.add(ok?'ok':'no');el.querySelector('.mcrng').innerHTML=ok?'✓':'✕';
+  const sp=document.getElementById('fbl');if(sp){sp.textContent=ok?sel:bl;sp.className='fbl '+(ok?'ok':'no');}
+  shwFb(ok,bl);if(ok){CUR.sc++;awXP(10);}else lsLv();shwNxt();
+}
+function doAns(){
+  if(CUR.ans)return;CUR.ans=true;
+  const q=CUR.qs[CUR.qi];
+  if(q.t==='type'){const inp=document.getElementById('tIn');const ok=nm(inp.value)===nm(q.a);inp.className='tf '+(ok?'ok':'no');if(!ok){const s=document.getElementById('ash');if(s)s.style.display='block';}shwFb(ok,q.a);if(ok){CUR.sc++;awXP(15);}else lsLv();}
+  else if(q.t==='sentence'){if(!CUR.tls.length){CUR.ans=false;return;}const built=CUR.tls.map(x=>x.w).join(' ');const ok=nm(built)===nm(q.a);const dr=document.getElementById('sdrp');dr.className='sdrp '+(ok?'ok':'no');shwFb(ok,q.a);if(ok){CUR.sc++;awXP(20);}else lsLv();}
+  else if(q.t==='translate'){const val=(document.getElementById('trIn')||{}).value||'';const kw=q.a.toLowerCase().split(/\s+/).filter(w=>w.length>3);const mtch=kw.filter(w=>val.toLowerCase().includes(w));const ok=mtch.length>=Math.ceil(kw.length*.6)&&val.length>3;const s=document.getElementById('ash');if(s)s.style.display='block';shwFb(ok,null,ok?null:'Check the suggested answer above');if(ok){CUR.sc++;awXP(25);}else lsLv();}
+  document.querySelectorAll('#qBts .br').forEach(b=>b.style.display='none');shwNxt();
+}
+function togTl(w,i){if(CUR.ans)return;const tl=document.getElementById('wt'+i),dr=document.getElementById('sdrp');const p=CUR.tls.findIndex(x=>x.i===i);if(p===-1){CUR.tls.push({i,w});tl.classList.add('ud');}else{CUR.tls.splice(p,1);tl.classList.remove('ud');}if(!CUR.tls.length){dr.innerHTML='<span class="dph">Tap words below to build the sentence...</span>';dr.className='sdrp';}else{dr.className='sdrp has';dr.innerHTML=CUR.tls.map(x=>`<div class="wt ud" onclick="rmTl(${x.i})">${x.w}</div>`).join('');}}
+function rmTl(i){if(CUR.ans)return;const p=CUR.tls.findIndex(x=>x.i===i);if(p!==-1){CUR.tls.splice(p,1);const t=document.getElementById('wt'+i);if(t)t.classList.remove('ud');}const dr=document.getElementById('sdrp');if(!CUR.tls.length){dr.innerHTML='<span class="dph">Tap words below to build the sentence...</span>';dr.className='sdrp';}else{dr.innerHTML=CUR.tls.map(x=>`<div class="wt ud" onclick="rmTl(${x.i})">${x.w}</div>`).join('');}}
+function shwFb(ok,ans,ex){const fb=document.getElementById('fb');fb.className='fb '+(ok?'ok':'no');fb.innerHTML=ok?`<div class="fbt">✓ Saktë — that's correct!</div>`:`<div class="fbt">✕ Not quite</div>${ans?`<div class="fba">Correct answer: ${ans}</div>`:''}${ex?`<div class="fbd">${ex}</div>`:''}`;setTimeout(()=>{const b=document.getElementById('qBdy');if(b)b.scrollTop=b.scrollHeight;},100);}
+function shwNxt(){const n=document.getElementById('nxt');if(n)n.style.display='inline-flex';}
+function nxtQ(){CUR.qi++;CUR.ans=false;CUR.tls=[];if(CUR.qi>=CUR.qs.length)shwCompl();else rndrQ();}
+function shwCompl(){
+  const tot=CUR.qs.length,pc=Math.round(CUR.sc/tot*100),stars=pc>=90?3:pc>=60?2:1;
+  const emo=pc===100?'🏆':pc>=80?'🎓':pc>=60?'✨':'📖',xp=50+stars*25;
+  const prev=ST.dn[CUR.lv][CUR.tp]||0;if(stars>prev){ST.dn[CUR.lv][CUR.tp]=stars;ST.streak++;}
+  ST.lessDay++;awXP(xp);sv();if(pc>=80)spwnCf();
+  document.getElementById('qBdy').innerHTML=`<div class="cscr">
+    <div class="cemo">${emo}</div>
+    <div class="ctit">${pc===100?'Perfect.':pc>=80?'Really good.':pc>=60?'Not bad.':'Keep practising.'}</div>
+    <div class="csb2">${CUR.sc} of ${tot} correct · ${pc}%</div>
+    <div class="cxpw"><div class="cxpn">+${xp}</div><div class="cxpl">XP earned</div></div>
+    <div class="cst">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+    <div class="csrow">
+      <div class="csbox"><div class="csbn" style="color:var(--grn)">${CUR.sc}</div><div class="csbl">Correct</div></div>
+      <div class="csbox"><div class="csbn" style="color:var(--red)">${tot-CUR.sc}</div><div class="csbl">Wrong</div></div>
+      <div class="csbox"><div class="csbn" style="color:var(--gold)">${pc}%</div><div class="csbl">Score</div></div>
+    </div>
+    <div class="cbts">
+      <button class="btn bg2b bfl" onclick="clsQ()">← Back</button>
+      <button class="btn br bfl" onclick="stTp('${CUR.lv}','${CUR.tp}')">Try again</button>
+    </div></div>`;
+  document.getElementById('qBts').innerHTML='';document.querySelector('.qsk').style.display='none';
+}
+function setSB(m,btn){sbMd=m;document.querySelectorAll('.st2').forEach(b=>b.classList.remove('on'));btn.classList.add('on');rndrSB();}
+function rndrSB(){
+  const el=document.getElementById('sbCnt');
+  if(sbMd==='pat'){el.innerHTML=SBP.map((p,i)=>`<div class="gcd"><div class="gcbg">Rule ${i+1} of ${SBP.length}</div><div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px">${p.p}</div><div class="gcal" onclick="spk('${esc(p.a)}')">${p.a} <span style="font-size:16px;opacity:.5">🔊</span></div><div class="gcen">${p.e}</div><div class="gcst">${p.s}</div><div class="gcnt">${p.n}</div></div>`).join('');}
+  else{const data=sbMd==='easy'?SBE:sbMd==='med'?SBM:SBA;el.innerHTML=data.map((q,i)=>rndrSBQ(q,i,data.length)).join('');}
+}
+function rndrSBQ(q,i,tot){const ws=shfl([...q.w]);return `<div class="sbex" id="sbex${i}"><div class="sbn">Exercise ${i+1} of ${tot}</div><div class="sbqt">${q.q}</div><div class="sbht">${q.h}</div><div class="sdrp" id="sbd${i}"><span class="dph">Tap words below...</span></div><div class="wbk"><div class="wbl">Word bank:</div>${ws.map((w,j)=>`<div class="wt" id="sbwt${i}-${j}" onclick="sbTog(${i},${j},'${esc(w)}')">${w}</div>`).join('')}</div><div class="fb" id="sbfb${i}"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="btn bg2b bsm" onclick="sbRst(${i})">Reset</button><button class="btn br bsm" onclick="sbChk(${i},'${esc(q.a)}')">Check</button><button class="btn bgr bsm" id="sbsp${i}" style="display:none" onclick="spk('${esc(q.a.replace(/[?!.,]/g,''))}')">🔊 Hear it</button></div></div>`;}
+function sbTog(qi,wi,w){if(!sbT[qi])sbT[qi]=[];const a=sbT[qi],tl=document.getElementById(`sbwt${qi}-${wi}`),dr=document.getElementById(`sbd${qi}`);const p=a.findIndex(x=>x.wi===wi);if(p===-1){a.push({wi,w});tl.classList.add('ud');}else{a.splice(p,1);tl.classList.remove('ud');}if(!a.length){dr.innerHTML='<span class="dph">Tap words below...</span>';dr.className='sdrp';}else{dr.className='sdrp has';dr.innerHTML=a.map(x=>`<div class="wt ud" onclick="sbRmv(${qi},${x.wi})">${x.w}</div>`).join('');}}
+function sbRmv(qi,wi){if(!sbT[qi])return;const p=sbT[qi].findIndex(x=>x.wi===wi);if(p!==-1){sbT[qi].splice(p,1);const t=document.getElementById(`sbwt${qi}-${wi}`);if(t)t.classList.remove('ud');}const dr=document.getElementById(`sbd${qi}`);if(!sbT[qi]?.length){dr.innerHTML='<span class="dph">Tap words below...</span>';dr.className='sdrp';}else{dr.innerHTML=sbT[qi].map(x=>`<div class="wt ud" onclick="sbRmv(${qi},${x.wi})">${x.w}</div>`).join('');}}
+function sbRst(qi){sbT[qi]=[];document.querySelectorAll(`[id^="sbwt${qi}-"]`).forEach(t=>t.classList.remove('ud'));const dr=document.getElementById(`sbd${qi}`);dr.innerHTML='<span class="dph">Tap words below...</span>';dr.className='sdrp';const fb=document.getElementById(`sbfb${qi}`);if(fb)fb.className='fb';const sp=document.getElementById(`sbsp${qi}`);if(sp)sp.style.display='none';}
+function sbChk(qi,ans){if(!sbT[qi]?.length)return;const built=sbT[qi].map(x=>x.w).join(' '),ok=nm(built)===nm(ans);const fb=document.getElementById(`sbfb${qi}`),dr=document.getElementById(`sbd${qi}`);dr.className='sdrp '+(ok?'ok':'no');fb.className='fb '+(ok?'ok':'no');fb.innerHTML=ok?`<div class="fbt">✓ Saktë — perfect sentence!</div>`:`<div class="fbt">✕ Not quite</div><div class="fba">Correct: ${ans}</div>`;if(ok){awXP(15);ST.sbDn++;sv();}const sp=document.getElementById(`sbsp${qi}`);if(sp)sp.style.display='inline-flex';}
+function loadFC(){const cat=document.getElementById('fcCat').value;fcD=FCD[cat]||[];fcC=0;rndrFC();}
+function rndrFC(){if(!fcD.length)return;const c=fcD[fcC],ae=document.getElementById('fcDir').value==='a';document.getElementById('fcQ').textContent=ae?c.a:c.e;document.getElementById('fcQL').textContent=ae?'Albanian':'English';document.getElementById('fcA').textContent=ae?c.e:c.a;document.getElementById('fcPh').textContent='🔊 '+c.p;document.getElementById('fcI').textContent=fcC+1;document.getElementById('fcT').textContent=fcD.length;document.getElementById('fcCd').classList.remove('fl');ST.fcSn++;sv();if(fcD.length<=20){document.getElementById('fcDts').innerHTML=fcD.map((_,i)=>`<div class="fcd ${i<fcC?'sn':i===fcC?'cu':''}"></div>`).join('');}}
+function flipFC(){document.getElementById('fcCd').classList.toggle('fl');}
+function fcN(d){fcC=(fcC+d+fcD.length)%fcD.length;rndrFC();}
+function fcSh(){fcD=shfl([...fcD]);fcC=0;rndrFC();}
+function rndrPh(f=''){const fl=f.toLowerCase();let h='';PHS.forEach(ct=>{const its=ct.i.filter(p=>!fl||p.a.toLowerCase().includes(fl)||p.e.toLowerCase().includes(fl));if(!its.length)return;h+=`<div class="phct">${ct.c}</div>`;its.forEach(p=>{h+=`<div class="phi" onclick="spk('${esc(p.a)}')"><div class="phtx"><div class="phal">${p.a}</div><div class="phen">${p.e}</div></div><button class="phsp" onclick="event.stopPropagation();spk('${esc(p.a)}')">🔊</button></div>`;});});document.getElementById('phCnt').innerHTML=h||'<p style="color:var(--ink3);padding:20px 0">Nothing found.</p>';}
+function fltPh(){rndrPh(document.getElementById('phQ').value);}
+function rndrPr(){
+  const td=Object.values(ST.dn).reduce((a,l)=>a+Object.keys(l).length,0);
+  document.getElementById('psX').textContent=ST.xp;document.getElementById('psS').textContent=ST.streak;document.getElementById('psL').textContent=td;
+  const bds=['Newcomer','Finding your feet','Getting somewhere','Seriously good','Almost fluent','Fluent Albanian 🦅'];
+  const tts=["You're just getting started.","Building momentum now.","This is real progress.","You're in the top tier.","Almost there.","Të lumtë — well done."];
+  const sbs=["Every lesson counts. Keep going.","Your streak is growing.","The hard levels await.","Seriously impressive.","Albania awaits you.","You did it."];
+  const lv=Math.min(Math.floor(td/7),5);
+  document.getElementById('prBdg').textContent=bds[lv];document.getElementById('prTt').textContent=tts[lv];document.getElementById('prSb').textContent=sbs[lv];
+  ['bg','md','hd','ex'].forEach(l=>{const d=Object.keys(ST.dn[l]).length,pc=Math.round(d/TOPICS.length*100);document.getElementById('pb-'+l).style.width=pc+'%';document.getElementById('pp-'+l).textContent=pc+'%';});
+  const avs=[{i:'🌱',n:'First steps',d:'Complete 1 lesson',e:td>=1},{i:'🔥',n:'On fire',d:'5 day streak',e:ST.streak>=5},{i:'💎',n:'XP collector',d:'500 XP earned',e:ST.xp>=500},{i:'🧠',n:'Beginner done',d:'All beginner topics',e:Object.keys(ST.dn.bg).length>=TOPICS.length},{i:'⚡',n:'Intermediate',d:'All medium topics',e:Object.keys(ST.dn.md).length>=TOPICS.length},{i:'🏆',n:'Champion',d:'All 4 levels',e:Object.values(ST.dn).every(l=>Object.keys(l).length>=TOPICS.length)},{i:'📚',n:'Dedicated',d:'30 lessons done',e:td>=30},{i:'🗣️',n:'Sentence builder',d:'20 sentences built',e:ST.sbDn>=20},{i:'🦅',n:'True Albanian',d:'1000 XP earned',e:ST.xp>=1000}];
+  document.getElementById('aGrd').innerHTML=avs.map(a=>`<div class="abx ${a.e?'ernd':''}"><div class="aic">${a.i}</div><div class="an">${a.n}</div><div class="ad">${a.d}</div></div>`).join('');
+}
+function awXP(n){ST.xp+=n;ST.xpDay+=n;document.getElementById('hX').textContent=ST.xp;sv();const p=document.getElementById('xpp');p.textContent='+'+n+' XP';p.style.display='block';p.style.animation='none';requestAnimationFrame(()=>{p.style.animation='xpa 2.2s forwards';});setTimeout(()=>{p.style.display='none';},2300);}
+function lsLv(){ST.lives=Math.max(0,ST.lives-1);document.getElementById('hL').textContent=ST.lives;rndrLv();sv();}
+function spwnCf(){const w=document.getElementById('cfw');w.innerHTML='';w.classList.add('act');const cs=['#c0392b','#b7860b','#27ae60','#2471a3','#8e44ad','#e67e22'];for(let i=0;i<50;i++){const c=document.createElement('div');c.className='cf';c.style.cssText=`left:${Math.random()*100}%;background:${cs[Math.floor(Math.random()*cs.length)]};width:${5+Math.random()*8}px;height:${5+Math.random()*8}px;border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*.8}s;`;w.appendChild(c);}setTimeout(()=>{w.classList.remove('act');w.innerHTML='';},4000);}
+function spk(txt){if(!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(txt);const vs=speechSynthesis.getVoices();const av=vs.find(v=>v.lang.startsWith('sq'));if(av)u.voice=av;u.rate=.82;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function nm(s){return(s||'').toLowerCase().trim().replace(/[?!.,]/g,'').replace(/\s+/g,' ');}
+function esc(s){return(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+function shfl(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+(function(){
+  updH();rndrPth();rndrPh();
+  if(window.speechSynthesis){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();}
+  let tx=0;
+  document.getElementById('fcSc')?.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+  document.getElementById('fcSc')?.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)fcN(dx<0?1:-1);});
+})();
+</script>
+</body>
+</html>
