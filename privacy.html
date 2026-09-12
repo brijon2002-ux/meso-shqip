@@ -3,104 +3,129 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Learn Albanian — Privacy Policy</title>
+<title>Privacy policy — Learn Albanian</title>
+<meta name="description" content="What the Learn Albanian iOS app collects, what it doesn't, and who it shares data with.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800;900&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
+  :root{
+    --red:#C8102E;
+    --ink:#17120F;
+    --bg:#F4F0EA;
+    --muted:#6E665D;
+    --line:#E2DAD0;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.65; max-width:760px; margin:0 auto; padding:32px 20px 64px;
-    color:#1a1a1a; background:#fff;
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-weight:500;line-height:1.6;-webkit-font-smoothing:antialiased;
   }
-  h1{font-size:1.7rem; margin-bottom:4px;}
-  h2{font-size:1.2rem; margin-top:34px; border-bottom:1px solid #eee; padding-bottom:6px;}
-  .meta{color:#777; font-size:.9rem; margin-bottom:8px;}
-  ul{padding-left:22px;} li{margin:6px 0;}
-  a{color:#c0182f;}
-  code{background:#f4f4f4; padding:1px 5px; border-radius:4px; font-size:.9em;}
-  @media (prefers-color-scheme: dark){
-    body{background:#141414;color:#e8e8e8;} h2{border-color:#333;}
-    code{background:#242424;}
+  .wrap{max-width:680px;margin:0 auto;padding:0 26px}
+  header{padding:30px 0 0}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:19px;letter-spacing:-.4px;text-decoration:none;color:var(--ink)}
+  .brand .mark{width:30px;height:30px;border-radius:8px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:16px}
+  .brand span.two{color:var(--red)}
+
+  h1{font-size:clamp(34px,5.4vw,48px);font-weight:900;line-height:1.05;letter-spacing:-1.7px;margin:54px 0 14px}
+  .updated{font-size:14.5px;color:var(--muted);margin:0 0 34px}
+
+  .summary{
+    background:var(--ink);color:#fff;border-radius:20px;padding:28px 30px;margin-bottom:50px;
   }
+  .summary p{margin:0;color:#E5DED5;font-size:16.5px;max-width:48ch}
+  .summary p + p{margin-top:12px}
+  .summary strong{color:#fff;font-weight:800}
+
+  h2{font-size:21px;font-weight:900;letter-spacing:-.6px;margin:40px 0 12px}
+  p{margin:0 0 14px;font-size:16.5px;color:var(--muted);max-width:62ch}
+  p.ink{color:var(--ink)}
+  ul{margin:0 0 14px;padding-left:20px;color:var(--muted);font-size:16.5px;max-width:62ch}
+  li{margin-bottom:8px}
+  a{color:var(--ink);font-weight:700}
+
+  footer{padding:40px 0 56px;border-top:1.5px solid var(--line);margin-top:52px;font-size:14.5px;color:var(--muted)}
+  footer nav{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px}
+  footer nav a{font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--line);padding-bottom:2px}
+  footer nav a:hover,footer nav a:focus-visible{border-color:var(--red);color:var(--red)}
+
+  :focus-visible{outline:2.5px solid var(--red);outline-offset:3px;border-radius:4px}
+  @media (max-width:620px){ .summary{padding:24px 22px} }
 </style>
 </head>
 <body>
 
-<h1>Privacy Policy — Learn Albanian</h1>
-<p class="meta">Last updated: <strong>10 September 2026</strong></p>
+<div class="wrap">
+  <header>
+    <a class="brand" href="index.html"><span class="mark">🦅</span>Learn <span class="two">Albanian</span></a>
+  </header>
 
-<p>This Privacy Policy explains how <strong>Learn Albanian App</strong> (“we”, “us”)
-handles information in connection with the <strong>Learn Albanian</strong> mobile application
-(the “App”). We have built the App to collect as little personal information as possible.</p>
+  <h1>Privacy policy</h1>
+  <p class="updated">Last updated 12 September 2026</p>
 
-<h2>1. No account required</h2>
-<p>You do not need to create an account, sign in, or give us your name or email to use the App.
-Your learning progress (lessons completed, streaks, XP) is stored <strong>locally on your device</strong>.</p>
+  <div class="summary">
+    <p><strong>The short version.</strong> Learn Albanian has no accounts and no sign-up. Your learning progress stays on your phone. Nothing you do in the app is sold, and there is no advertising or tracking.</p>
+    <p>The one exception is the AI tutor: to reply to you, your messages have to leave your phone. How that works is set out below.</p>
+  </div>
 
-<h2>2. Information processed when you make a purchase</h2>
-<p>The App offers a one-time in-app purchase to unlock all content. Purchases are handled by the
-app store (Google Play or Apple) and by our purchase-infrastructure provider,
-<strong>RevenueCat</strong>. When you buy or restore a purchase, the following may be processed:</p>
-<ul>
-  <li>Purchase and transaction history (what was bought, and whether it is active);</li>
-  <li>A randomly generated app-user identifier used to remember your purchase;</li>
-  <li>Device and technical identifiers (e.g. device model, operating-system version, country)
-      used to deliver and validate the purchase.</li>
-</ul>
-<p>We do <strong>not</strong> receive your card number or payment details — those are handled
-entirely by Google Play or Apple.</p>
+  <h2>Who runs this app</h2>
+  <p>Learn Albanian is made and run by Brijon Grisha, an independent developer based in the United Kingdom. For anything in this policy, contact <a href="mailto:learnalbanianofficial@gmail.com">learnalbanianofficial@gmail.com</a>.</p>
 
-<h2>3. Notifications</h2>
-<p>If you allow notifications, the App sends you learning reminders (for example, daily streak
-reminders). These are scheduled on your device. You can turn them off at any time in your device
-settings. We do not use notifications to collect personal information.</p>
+  <h2>What stays on your phone</h2>
+  <p>Your progress through the units, your streak, your flashcard history and your settings are stored in the app's own storage on your device. They are not uploaded anywhere. Deleting the app deletes them.</p>
 
-<h2>4. How the information is used</h2>
-<ul>
-  <li>To provide and unlock the content you purchase;</li>
-  <li>To restore your purchase across your devices;</li>
-  <li>To keep the App working, secure, and free of fraud;</li>
-  <li>To understand, in aggregate, how the App is used so we can improve it.</li>
-</ul>
-<p>We do <strong>not</strong> sell your personal information, and we do not use it for
-third-party advertising.</p>
+  <h2>The AI tutor</h2>
+  <p class="ink">This is the only part of the app that sends anything you write off your device.</p>
+  <p>When you send a message in the Practice tab, the app sends the following to a server I operate:</p>
+  <ul>
+    <li>the message you typed, and up to your last eight messages in that conversation, so the tutor can follow the thread</li>
+    <li>the scenario and level you picked</li>
+    <li>an anonymous identifier generated by RevenueCat, used to check that you have an active subscription and to apply a daily message limit</li>
+  </ul>
+  <p>My server forwards the conversation to <a href="https://www.anthropic.com/legal/privacy">Anthropic</a>, which runs the Claude model that writes the reply, and sends the reply back to your phone. Anthropic processes the text to generate that reply. Anthropic does not use it to train its models.</p>
+  <p>My server keeps a count of how many messages each anonymous identifier has sent per day, so the daily limit works. It does not store the content of your conversations. The conversation itself lives only on your phone, and clearing it in the app removes it.</p>
+  <p class="ink">Please don't type anything sensitive into the tutor — real names, addresses, health details, financial information. It's a practice partner, not a private notebook.</p>
 
-<h2>5. Who we share it with</h2>
-<p>Information is shared only with service providers who help us run the App:</p>
-<ul>
-  <li><strong>Google Play / Apple</strong> — process payments and app distribution
-      (<a href="https://policies.google.com/privacy">Google Privacy Policy</a>,
-       <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a>);</li>
-  <li><strong>RevenueCat</strong> — manages in-app purchases and entitlements
-      (<a href="https://www.revenuecat.com/privacy">RevenueCat Privacy Policy</a>).</li>
-</ul>
+  <h2>Purchases and subscriptions</h2>
+  <p>Payments are handled entirely by Apple. I never see your card details, billing address or Apple Account email.</p>
+  <p>To know whether you've unlocked the course or have an active subscription, the app uses <a href="https://www.revenuecat.com/privacy">RevenueCat</a>. RevenueCat assigns your installation a random anonymous identifier and records which products you've bought and whether a subscription is active. It is not linked to your name or email.</p>
 
-<h2>6. Data retention</h2>
-<p>Local progress remains on your device until you delete the App or clear its data. Purchase
-records are retained by our providers for as long as needed to honour your purchase and to meet
-legal, tax, and accounting obligations.</p>
+  <h2>Notifications</h2>
+  <p>If you turn on reminders, they are scheduled on your phone by iOS. Nothing is sent through a server and no notification data reaches me.</p>
 
-<h2>7. Children</h2>
-<p>The App is a general-audience educational tool and is not directed at children under 13.
-We do not knowingly collect personal information from children. If you believe a child has
-provided personal information, please contact us and we will delete it.</p>
+  <h2>What the app does not do</h2>
+  <ul>
+    <li>No accounts, no passwords, no email collection</li>
+    <li>No advertising and no ad networks</li>
+    <li>No analytics or behavioural tracking</li>
+    <li>No location, contacts, photos, microphone or camera access</li>
+    <li>No selling or sharing of data with anyone beyond the two services named above</li>
+  </ul>
 
-<h2>8. Your rights</h2>
-<p>Depending on where you live (including under UK GDPR and EU GDPR), you may have the right to
-access, correct, or delete personal information, or to object to or restrict its processing.
-Because the App requires no account, the simplest way to remove locally stored data is to delete
-the App. For purchase-related data, contact us using the details below and we will help.</p>
+  <h2>Children</h2>
+  <p>The app is rated 4+ and is suitable for all ages, but it isn't aimed at children under 13 and I don't knowingly collect anything from them. Since there are no accounts, the app has no way of identifying a user's age.</p>
 
-<h2>9. International transfers</h2>
-<p>Our service providers may process information in countries outside your own, including the
-United States. Where required, appropriate safeguards are in place to protect your information.</p>
+  <h2>Your rights</h2>
+  <p>Because the app has no accounts, I hold almost nothing that could identify you. If you want the usage counter tied to your anonymous identifier deleted, email me and I'll remove it. You can find your identifier by contacting me from the device in question and I'll explain how to read it.</p>
+  <p>If you're in the UK or EU, you have rights under the UK GDPR and GDPR to access, correct or erase personal data, and to complain to your data protection authority. In the UK that's the <a href="https://ico.org.uk">Information Commissioner's Office</a>.</p>
 
-<h2>10. Changes to this policy</h2>
-<p>We may update this policy from time to time. The “Last updated” date above shows the latest
-version. Continued use of the App after changes means you accept the updated policy.</p>
+  <h2>Where data is processed</h2>
+  <p>My server runs on Google Cloud. Anthropic and RevenueCat process data in the United States. Where personal data leaves the UK or EU, those transfers rely on the safeguards each provider has in place.</p>
 
-<h2>11. Contact</h2>
-<p>Questions or requests about your privacy? Contact us at:
-<br><strong>learnalbanianofficial@hotmail.com</strong></p>
+  <h2>Changes to this policy</h2>
+  <p>If the app starts collecting something new, I'll update this page and change the date at the top. Significant changes will be noted in the app's release notes.</p>
+
+  <footer>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="support.html">Support</a>
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of use</a>
+    </nav>
+    Made by Brijon Grisha. Questions: <a href="mailto:learnalbanianofficial@gmail.com">learnalbanianofficial@gmail.com</a>
+  </footer>
+</div>
 
 </body>
 </html>
